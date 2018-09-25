@@ -46,6 +46,9 @@ namespace DAQ
             com.isEnable_Input = checkState.ToString();
 
             com.in_bit_offset = this.in_bit_offset.Text;
+            com.in_word_offset = this.in_word_offset.Text;
+            com.out_word_offset = this.out_word_offset.Text;
+            com.out_bit_offset = this.out_bit_offset.Text;
 
             if (string.IsNullOrEmpty(offset))
             {

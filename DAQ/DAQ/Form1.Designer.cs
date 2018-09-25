@@ -34,12 +34,16 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Add = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.exportXml = new System.Windows.Forms.Button();
             this.importXml = new System.Windows.Forms.Button();
             this.ClearListView = new System.Windows.Forms.Button();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listView1
@@ -50,7 +54,11 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader8});
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader9,
+            this.columnHeader11,
+            this.columnHeader12});
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(-1, 1);
             this.listView1.Name = "listView1";
@@ -84,10 +92,6 @@
             // 
             this.columnHeader5.Text = "偏移量";
             this.columnHeader5.Width = 87;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "注释";
             // 
             // Add
             // 
@@ -139,6 +143,31 @@
             this.ClearListView.UseVisualStyleBackColor = true;
             this.ClearListView.Click += new System.EventHandler(this.ClearListView_Click);
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "寫入字偏移";
+            this.columnHeader6.Width = 96;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.DisplayIndex = 7;
+            this.columnHeader7.Text = "寫入位偏移";
+            this.columnHeader7.Width = 92;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "讀出字偏移";
+            this.columnHeader9.Width = 90;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "讀出位偏移";
+            this.columnHeader11.Width = 103;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "注釋";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -167,10 +196,14 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Button exportXml;
         private System.Windows.Forms.Button importXml;
         private System.Windows.Forms.Button ClearListView;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
     }
 }
 

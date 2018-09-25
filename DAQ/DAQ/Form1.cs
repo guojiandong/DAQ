@@ -87,7 +87,6 @@ namespace DAQ
         {
 
             System.Console.WriteLine("AddComponent + componentType: {0}", com.componentType.ToString());
-            listViewData.Add(com);
             ListViewItem lt = new ListViewItem();
             lt.Text = com.componentType.ToString();
             lt.SubItems.Add(com.isEnable_Input.ToString());
