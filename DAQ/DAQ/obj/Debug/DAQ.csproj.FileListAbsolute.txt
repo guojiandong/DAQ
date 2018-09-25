@@ -1,0 +1,11 @@
+E:\DAQ_DEMO\DAQ\DAQ\bin\Debug\DAQ.exe.config
+E:\DAQ_DEMO\DAQ\DAQ\bin\Debug\DAQ.exe
+E:\DAQ_DEMO\DAQ\DAQ\bin\Debug\DAQ.pdb
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.csprojResolveAssemblyReference.cache
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.Form1.resources
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.Properties.Resources.resources
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.csproj.GenerateResource.Cache
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.exe
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.pdb
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.BtnComponent.resources
+E:\DAQ_DEMO\DAQ\DAQ\obj\Debug\DAQ.TextComponent.resources
