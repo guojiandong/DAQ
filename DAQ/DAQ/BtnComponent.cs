@@ -37,27 +37,37 @@ namespace DAQ
             Component com = new Component();
             this.remove.Hide();
             this.add.Show();
+
             com.operatorType = (OperatorType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.BtnComponent;
 
-            string offset = this.offset.Text;
-            string note = this.note.Text;
-            bool checkState = this.checkBox1.Checked;
-            com.isEnable_Input = checkState.ToString();
+            bool diffAddress = this.checkBox1.Checked;
+            com.isEnable_Input = diffAddress.ToString();
 
-            com.in_bit_offset = this.in_bit_offset.Text;
-            com.in_word_offset = this.in_word_offset.Text;
-            com.out_word_offset = this.out_word_offset.Text;
-            com.out_bit_offset = this.out_bit_offset.Text;
-
-            if (string.IsNullOrEmpty(offset))
+            if (diffAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
             {
-                MessageBox.Show("偏移量不能为空");
-                return;
+                if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text) || 
+                    string.IsNullOrEmpty(this.out_word_offset.Text) || string.IsNullOrEmpty(this.out_bit_offset.Text))
+                    {
+                        MessageBox.Show("讀取，寫入偏移量均不能为空");
+                        return;
+                    }
+            }else    // 相同的寫入讀取地址，可以值寫一行
+            {
+                if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text))
+                {
+                    MessageBox.Show("字偏移量，位偏移量均不能为空");
+                    return;
+                }
             }
-            com.offset = this.offset.Text;
-            com.note = note;
-            
+
+            com.in_bit_offset = CheckEmpty(this.in_bit_offset.Text);
+            com.in_word_offset = CheckEmpty(this.in_word_offset.Text);
+            com.out_word_offset = CheckEmpty(this.out_word_offset.Text);
+            com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
+            com.note = CheckEmpty(this.note.Text);
+            com.offset = "0";
+
             if (this.setBtnValue != null)
                 this.setBtnValue(com);
         }
@@ -69,6 +79,10 @@ namespace DAQ
             this.comboBox1.SelectedIndex = 0;
             this.offset.Text = "";
             this.note.Text = "";
+            this.in_word_offset.Text = "";
+            this.in_bit_offset.Text = "";
+            this.out_word_offset.Text = "";
+            this.out_bit_offset.Text = "";
         }
 
         private void offset_TextChanged(object sender, EventArgs e)
@@ -119,11 +133,14 @@ namespace DAQ
 
         public void InitUI(Component com)
         {
-            this.offset.Text = com.offset;
-            if (!string.IsNullOrEmpty(com.note))
-                this.note.Text = com.note;
+            this.offset.Text = CheckEmpty( com.offset );
+            this.note.Text = CheckEmpty( com.note );
             this.checkBox1.Checked = (bool)Convert.ToBoolean(com.isEnable_Input);
-            this.comboBox1.SelectedIndex = (int)com.operatorType ; 
+            this.comboBox1.SelectedIndex = (int)com.operatorType ;
+            this.in_word_offset.Text = CheckEmpty( com.in_word_offset );
+            this.in_bit_offset.Text = CheckEmpty( com.in_bit_offset );
+            this.out_word_offset.Text = CheckEmpty( com.out_word_offset );
+            this.out_bit_offset.Text = CheckEmpty( com.out_bit_offset );
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -133,15 +150,33 @@ namespace DAQ
             com.componentType = (int)ComponentType.BtnComponent;
             string offset = this.offset.Text;
             string note = this.note.Text;
-            bool checkState = this.checkBox1.Checked;
-            com.isEnable_Input = checkState.ToString();
-            if (string.IsNullOrEmpty(offset))
+            bool diffAddress = this.checkBox1.Checked;
+            com.isEnable_Input = diffAddress.ToString();
+
+            if (diffAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
             {
-                MessageBox.Show("偏移量不能为空");
-                return;
+                if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text) ||
+                    string.IsNullOrEmpty(this.out_word_offset.Text) || string.IsNullOrEmpty(this.out_bit_offset.Text))
+                {
+                    MessageBox.Show("讀取，寫入偏移量均不能为空");
+                    return;
+                }
             }
-            com.offset = this.offset.Text;
-            com.note = note;
+            else    // 相同的寫入讀取地址，可以值寫一行
+            {
+                if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text))
+                {
+                    MessageBox.Show("字偏移量，位偏移量均不能为空");
+                    return;
+                }
+            }
+
+            com.offset = "0";
+            com.in_bit_offset = CheckEmpty(this.in_bit_offset.Text);
+            com.in_word_offset = CheckEmpty(this.in_word_offset.Text);
+            com.out_word_offset = CheckEmpty(this.out_word_offset.Text);
+            com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
+            com.note = CheckEmpty(this.note.Text);
 
             if (saveHandler != null)
                 saveHandler(com);
@@ -186,6 +221,27 @@ namespace DAQ
 
         private void out_bit_offset_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void label5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = this.checkBox1.Checked;
+            this.out_word_offset.Enabled = !isChecked;
+            this.out_bit_offset.Enabled = !isChecked;
+        }
+
+        public static string CheckEmpty(string value)
+        {
+            string str = "0";
+            if (string.IsNullOrEmpty(value))
+                return str;
+            return value;
 
         }
     }

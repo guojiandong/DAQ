@@ -39,7 +39,7 @@ namespace DAQ
                 MessageBox.Show("偏移量不能为空");
                 return;
             }
-            com.offset = this.offset.Text;
+            com.offset = offset ;
             if (this.setTextValue != null)
                 this.setTextValue(com);
         }
@@ -94,7 +94,6 @@ namespace DAQ
             com.operatorType = (OperatorType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.TextComponent;
             string offset = this.offset.Text;
-            string note = "";
             bool checkState = this.checkBox1.Checked;
             com.isEnable_Input = checkState.ToString();
             if (string.IsNullOrEmpty(offset))
@@ -103,7 +102,7 @@ namespace DAQ
                 return;
             }
             com.offset = this.offset.Text;
-            com.note = note;
+            com.note = "";
 
             if (this.saveHandler != null)
                 this.saveHandler(com);
