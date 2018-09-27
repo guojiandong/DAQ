@@ -37,14 +37,15 @@ namespace DAQ
             Component com = new Component();
             this.remove.Hide();
             this.add.Show();
+            this.save.Hide();
 
             com.operatorType = (OperatorType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.BtnComponent;
 
-            bool diffAddress = this.checkBox1.Checked;
-            com.isEnable_Input = diffAddress.ToString();
+            bool sameAddress = this.checkBox1.Checked;
+            com.isEnable_Input = sameAddress.ToString();
 
-            if (diffAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
+            if (!sameAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
             {
                 if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text) || 
                     string.IsNullOrEmpty(this.out_word_offset.Text) || string.IsNullOrEmpty(this.out_bit_offset.Text))
@@ -59,14 +60,30 @@ namespace DAQ
                     MessageBox.Show("字偏移量，位偏移量均不能为空");
                     return;
                 }
+
+                this.out_bit_offset.Text = this.in_bit_offset.Text.Trim();
+                this.out_word_offset.Text = this.in_word_offset.Text.Trim();
             }
 
+            if (isSameOffsetValue())
+            {
+                MessageBox.Show("读取，写入的字偏移量，位偏移量不能完全一致！");
+                return;
+            }
             com.in_bit_offset = CheckEmpty(this.in_bit_offset.Text);
             com.in_word_offset = CheckEmpty(this.in_word_offset.Text);
             com.out_word_offset = CheckEmpty(this.out_word_offset.Text);
             com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
             com.note = CheckEmpty(this.note.Text);
             com.offset = "0";
+
+            if (UInt16.Parse(com.in_bit_offset) > 16 || UInt16.Parse(com.out_bit_offset) > 16 ||
+                UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 16)
+            {
+                MessageBox.Show("请检查您的字偏移量不能大于100， 位偏移量不能大于16");
+                return;
+            }
+
 
             if (this.setBtnValue != null)
                 this.setBtnValue(com);
@@ -123,11 +140,13 @@ namespace DAQ
             {
                 this.add.Show();
                 this.remove.Hide();
+                this.save.Hide();
             }
             else if (mode == ChangeMode.Change)
             {
                 this.add.Hide();
                 this.remove.Show();
+                this.save.Show();
             }
         }
 
@@ -150,10 +169,10 @@ namespace DAQ
             com.componentType = (int)ComponentType.BtnComponent;
             string offset = this.offset.Text;
             string note = this.note.Text;
-            bool diffAddress = this.checkBox1.Checked;
-            com.isEnable_Input = diffAddress.ToString();
+            bool sameAddress = this.checkBox1.Checked;
+            com.isEnable_Input = sameAddress.ToString();
 
-            if (diffAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
+            if (!sameAddress)  // 不同地址的時候，寫入、讀取的字偏移，位偏移都必須填寫
             {
                 if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text) ||
                     string.IsNullOrEmpty(this.out_word_offset.Text) || string.IsNullOrEmpty(this.out_bit_offset.Text))
@@ -169,6 +188,14 @@ namespace DAQ
                     MessageBox.Show("字偏移量，位偏移量均不能为空");
                     return;
                 }
+                this.out_bit_offset.Text = this.in_bit_offset.Text.Trim();
+                this.out_word_offset.Text = this.in_word_offset.Text.Trim();
+            }
+
+            if (isSameOffsetValue())
+            {
+                MessageBox.Show("读取，写入的字偏移量，位偏移量不能完全一致！");
+                return;
             }
 
             com.offset = "0";
@@ -177,6 +204,13 @@ namespace DAQ
             com.out_word_offset = CheckEmpty(this.out_word_offset.Text);
             com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
             com.note = CheckEmpty(this.note.Text);
+
+            if (UInt16.Parse(com.in_bit_offset) > 16  || UInt16.Parse(com.out_bit_offset) > 16 || 
+                UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 16 )
+            {
+                MessageBox.Show("请检查您的字偏移量不能大于100， 位偏移量不能大于16");
+                return;
+            }
 
             if (saveHandler != null)
                 saveHandler(com);
@@ -201,7 +235,7 @@ namespace DAQ
 
         private void in_word_offset_TextChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void in_word_offset_label_Click(object sender, EventArgs e)
@@ -243,6 +277,23 @@ namespace DAQ
                 return str;
             return value;
 
+        }
+
+        public bool isSameOffsetValue()
+        {
+            if (this.checkBox1.Checked)
+            {
+                return false;
+            }
+            else
+            {
+                if (this.in_bit_offset.Text.Trim() == this.out_bit_offset.Text.Trim() && 
+                    this.in_word_offset.Text.Trim() == this.out_word_offset.Text.Trim())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

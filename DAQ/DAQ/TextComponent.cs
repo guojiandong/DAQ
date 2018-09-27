@@ -116,11 +116,13 @@ namespace DAQ
             {
                 this.add.Show();
                 this.remove.Hide();
+                this.save.Hide();
             }
             else if (mode == ChangeMode.Change)
             {
                 this.add.Hide();
                 this.remove.Show();
+                this.save.Show();
             }
         }
 
