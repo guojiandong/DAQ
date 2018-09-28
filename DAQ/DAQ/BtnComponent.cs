@@ -20,6 +20,7 @@ namespace DAQ
         public BtnComponent()
         {
             InitializeComponent();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         }
 
         private void BtnComponent_Load(object sender, EventArgs e)

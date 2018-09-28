@@ -72,15 +72,51 @@ namespace DAQ
           */
     }
 
-    
-    partial class DAQ_TextComponent : Component
-    {
-        
-    }
 
-    partial class DAQ_BtnComponent : Component
+    public class MemoryState
     {
-       
+        public int index;
+        public int Index                //序号
+        {
+            get { return index; }
+            set { index = value; }
+        }
+
+        public int used_count;
+        public int Used_count                //序号
+        {
+            get { return used_count; }
+            set { used_count = value; }
+        }
+
+        public int com_type;
+        public int Com_type            //控件类型
+        {
+            get { return com_type; }
+            set { com_type = value; }
+        }
+
+        public bool state;            //使用状态
+        public bool State              
+        { 
+            get { return state; }
+            set { state = value; }
+        }
+        public string bit_used_str;
+        public string Bit_used_str    //使用的bit位标识  比如： "1,2,4" :标识 该字的 1,2,4 bit位已经被使用了
+        {
+            get { return bit_used_str; }
+            set { bit_used_str = value; }
+        }
+
+        public MemoryState(int index, int type, bool state, int used_count ,string use_str)
+        {
+            this.index = index;
+            this.com_type = type;
+            this.state = state;
+            this.bit_used_str = use_str;
+            
+        }
     }
     
 }

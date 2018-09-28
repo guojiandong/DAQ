@@ -20,6 +20,7 @@ namespace DAQ
         public TextComponent()
         {
             InitializeComponent();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         }
 
         private void Form2_Load(object sender, EventArgs e)

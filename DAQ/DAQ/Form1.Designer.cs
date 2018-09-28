@@ -34,16 +34,18 @@
             this.dataType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.operatorType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Add = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.exportXml = new System.Windows.Forms.Button();
-            this.importXml = new System.Windows.Forms.Button();
-            this.ClearListView = new System.Windows.Forms.Button();
             this.inWordOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.inBitOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.outWordOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.outBitOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.note = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Add = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.exportXml = new System.Windows.Forms.Button();
+            this.importXml = new System.Windows.Forms.Button();
+            this.ClearListView = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // listView1
@@ -62,7 +64,7 @@
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(1, 1);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(999, 434);
+            this.listView1.Size = new System.Drawing.Size(999, 351);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -93,6 +95,31 @@
             // 
             this.offset.Text = "偏移量";
             this.offset.Width = 69;
+            // 
+            // inWordOffset
+            // 
+            this.inWordOffset.Text = "寫入字偏移";
+            this.inWordOffset.Width = 96;
+            // 
+            // inBitOffset
+            // 
+            this.inBitOffset.Text = "寫入位偏移";
+            this.inBitOffset.Width = 92;
+            // 
+            // outWordOffset
+            // 
+            this.outWordOffset.Text = "讀出字偏移";
+            this.outWordOffset.Width = 90;
+            // 
+            // outBitOffset
+            // 
+            this.outBitOffset.Text = "讀出位偏移";
+            this.outBitOffset.Width = 103;
+            // 
+            // note
+            // 
+            this.note.Text = "注釋";
+            this.note.Width = 114;
             // 
             // Add
             // 
@@ -144,36 +171,23 @@
             this.ClearListView.UseVisualStyleBackColor = true;
             this.ClearListView.Click += new System.EventHandler(this.ClearListView_Click);
             // 
-            // inWordOffset
+            // dataGridView1
             // 
-            this.inWordOffset.Text = "寫入字偏移";
-            this.inWordOffset.Width = 96;
-            // 
-            // inBitOffset
-            // 
-            this.inBitOffset.Text = "寫入位偏移";
-            this.inBitOffset.Width = 92;
-            // 
-            // outWordOffset
-            // 
-            this.outWordOffset.Text = "讀出字偏移";
-            this.outWordOffset.Width = 90;
-            // 
-            // outBitOffset
-            // 
-            this.outBitOffset.Text = "讀出位偏移";
-            this.outBitOffset.Width = 103;
-            // 
-            // note
-            // 
-            this.note.Text = "注釋";
-            this.note.Width = 114;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(1, 359);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 27;
+            this.dataGridView1.Size = new System.Drawing.Size(999, 150);
+            this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1218, 459);
+            this.ClientSize = new System.Drawing.Size(1214, 523);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ClearListView);
             this.Controls.Add(this.importXml);
             this.Controls.Add(this.exportXml);
@@ -181,8 +195,9 @@
             this.Controls.Add(this.Add);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
-            this.Text = "編輯器";
+            this.Text = "编辑器";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -205,6 +220,7 @@
         private System.Windows.Forms.ColumnHeader outWordOffset;
         private System.Windows.Forms.ColumnHeader outBitOffset;
         private System.Windows.Forms.ColumnHeader note;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

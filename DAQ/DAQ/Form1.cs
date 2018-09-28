@@ -16,15 +16,16 @@ namespace DAQ
 
     public partial class Form1 : Form
     {
-        public List<Component> listViewData;
+        public List<MemoryState> list_MemoryState;
         BtnComponent form_Btn;
         TextComponent form_Text;
         public UInt16[] memory_block = new UInt16[100];  // 開闢100個int16位數組
 
         public Form1()
         {
-            listViewData = new List<Component>();
+            list_MemoryState = new List<MemoryState>();
             InitializeComponent();
+            InitMemoryState();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,6 +80,7 @@ namespace DAQ
             }
             Component com = new Component();
             int componentType = int.Parse(comValue[0]);
+            com.componentType = componentType;
             if (componentType == (int)ComponentType.BtnComponent)
             {
                 com.isEnable_Input = comValue[1];
@@ -87,7 +89,7 @@ namespace DAQ
                 com.out_word_offset = comValue[7];
                 com.out_bit_offset = comValue[8];
 
-                set_bit_value(ref memory_block, int.Parse( com.in_word_offset ), int.Parse( com.in_bit_offset ), false);
+                set_bit_value(ref memory_block, int.Parse(com.in_word_offset), int.Parse(com.in_bit_offset), false);
                 if (!Convert.ToBoolean(com.isEnable_Input))
                 {
                     set_bit_value(ref memory_block, int.Parse(com.out_word_offset), int.Parse(com.out_bit_offset), false);
@@ -95,11 +97,12 @@ namespace DAQ
             }
             else if (componentType == (int)ComponentType.TextComponent)
             {
-                set_word_value(ref memory_block, int.Parse( comValue[4] ), false);
+                set_word_value(ref memory_block, int.Parse(comValue[4]), false);
             }
 
             int indexDel = listView1.Items.IndexOf(listView1.FocusedItem);
             listView1.Items.RemoveAt(indexDel);//删除
+            UpdateMemoryState(com);
         }
 
         public void _saveHandler(Component com)
@@ -114,19 +117,19 @@ namespace DAQ
             int componentType = int.Parse(comValue[0]);
             if (componentType == (int)ComponentType.BtnComponent)
             {
-                bool sameAddress = Convert.ToBoolean( comValue[1] );
-                int in_word_offset = int.Parse( comValue[5] );
-                int in_bit_offset = int.Parse( comValue[6] );
-                int out_word_offset = int.Parse(comValue[7] );
-                int out_bit_offset = int.Parse( comValue[8] );
+                bool sameAddress = Convert.ToBoolean(comValue[1]);
+                int in_word_offset = int.Parse(comValue[5]);
+                int in_bit_offset = int.Parse(comValue[6]);
+                int out_word_offset = int.Parse(comValue[7]);
+                int out_bit_offset = int.Parse(comValue[8]);
 
                 set_bit_value(ref memory_block, in_word_offset, in_bit_offset, false);
-                if (!sameAddress) 
+                if (!sameAddress)
                     set_bit_value(ref memory_block, out_word_offset, out_bit_offset, false);
             }
             else if (componentType == (int)ComponentType.TextComponent)
             {
-                int offset = int.Parse( comValue[4] );
+                int offset = int.Parse(comValue[4]);
                 set_word_value(ref memory_block, offset, false);
             }
 
@@ -149,6 +152,7 @@ namespace DAQ
             item.SubItems[7].Text = CheckEmpty(com.out_word_offset);
             item.SubItems[8].Text = CheckEmpty(com.out_bit_offset);
             item.SubItems[9].Text = CheckEmpty(com.note);
+            UpdateMemoryState(com);
         }
 
         public void AddComponent(Component com)
@@ -173,6 +177,7 @@ namespace DAQ
             lt.SubItems.Add(CheckEmpty(com.note));
 
             this.listView1.Items.Add(lt);
+            UpdateMemoryState(com);
         }
 
 
@@ -189,17 +194,17 @@ namespace DAQ
             bool isSucc = true;
             if (isWholeWord)  //Text类型 映射到整个word
             {
-                isSucc = set_word_value(ref memory_block, word_offset,true);
+                isSucc = set_word_value(ref memory_block, word_offset, true);
             }
             else // btn类型 映射到word 的bit位
             {
-                isSucc = set_bit_value(ref memory_block, word_offset ,bit_offset, true);
+                isSucc = set_bit_value(ref memory_block, word_offset, bit_offset, true);
             }
             return true;
         }
 
         //检测内存是否被占用，没有占用的话 就将该内存置位1， 否则，提示该内存已被占用。
-        public bool checkMemory(Component com,  bool isOverrid)
+        public bool checkMemory(Component com, bool isOverrid)
         {
             bool isSucc = false;
             if (com.componentType == (int)ComponentType.TextComponent)
@@ -253,8 +258,8 @@ namespace DAQ
                         return false;
                     }
 
-                    bool succ1 =  memoryMapped(false, in_word_offset, in_bit_offset);
-                    bool succ2 =  memoryMapped(false, out_word_offset, out_bit_offset);
+                    bool succ1 = memoryMapped(false, in_word_offset, in_bit_offset);
+                    bool succ2 = memoryMapped(false, out_word_offset, out_bit_offset);
                     isSucc = succ1 & succ2;
                 }
             }
@@ -403,6 +408,8 @@ namespace DAQ
         private void ClearListView_Click(object sender, EventArgs e)
         {
             this.listView1.Items.Clear();
+            Array.Clear(memory_block, 0,memory_block.Length);
+            InitMemoryState();
         }
 
         public static string CheckEmpty(string value)
@@ -448,7 +455,7 @@ namespace DAQ
         /// <param name="value">位位数据的从右向左的偏移位索引(1~16)</param>
         /// <param name="bitValue">true设该位为1,false设为0</param>
         /// /// <returns>返回位设定后的值</returns>
-        public static bool set_bit_value(ref  UInt16[] block, int indexOfWord, int indexOfBit, bool bitValue)         //btn
+        public static bool set_bit_value(ref UInt16[] block, int indexOfWord, int indexOfBit, bool bitValue)         //btn
         {
             if (indexOfBit > 16)  //索引出错
             {
@@ -475,7 +482,7 @@ namespace DAQ
         /// </summary>
         /// <param name="block"></param>
         /// <param name="index"></param>
-        /// /// <param name="index">zero：false 置为0， true 置为1</param>
+        /// /// <param name="index">used：false 置为0， true 置为1</param>
         public static bool set_word_value(ref UInt16[] block, int index, bool used)        //text
         {
             if (index > 99)//索引出错
@@ -506,6 +513,131 @@ namespace DAQ
             if (block[index] > 0)
                 return true;
             return false;
+        }
+
+
+        //------------------------------------------------------------- 占用内存查看 DataGridView --------------------------------------//
+        /*****
+         * Color : UInt16
+         *       white：白色标识该内存字没有被使用。      == 0
+         *       green：绿色标识该内存少量被使用。        <= 3
+         *       yellow：黄色标识该内存中量以上被使用。   >= 10
+         *       red：   红色标识该内存即将使用完。       > 14  
+         * 
+         * 
+         * */
+        public void InitMemoryState()
+        {
+            list_MemoryState.Clear();
+            for (int i = 0; i < 100; i++)
+            {
+                list_MemoryState.Add(new MemoryState(i, -1, false, 0,""));
+            }
+            //  初始化控件的数据，
+            this.dataGridView1.DataSource = null;
+            //将对象list_MemoryState中的数据与dataGridView1中的数据绑定
+            this.dataGridView1.DataSource = this.list_MemoryState;
+            //this.list_MemoryState[0].Bit_used_str = "1-2-3-4-5";
+        }
+
+        public void UpdateMemoryState(Component com)
+        {
+            // 根据类型取出 字偏移 计算其位使用情况
+            if ( com.componentType == (int)ComponentType.TextComponent )
+            {
+                int offset = int.Parse(com.offset); // text 类型的offset 对应的是字
+                int curWordValue = memory_block[offset];
+                string binaryStr = GetStringBinary(curWordValue);
+                int numberOf1 = NumberOf1(curWordValue);
+                this.list_MemoryState[offset].Bit_used_str = binaryStr;
+                this.list_MemoryState[offset].Com_type = 1;
+                this.list_MemoryState[offset].State = numberOf1 > 0;
+                this.list_MemoryState[offset].Used_count = numberOf1;
+
+            }
+            else if ( com.componentType == (int)ComponentType.BtnComponent)
+            {
+                int in_word_offset = int.Parse(com.in_word_offset);
+                int out_word_offset = int.Parse(com.out_word_offset);
+                bool isSameAddress = Convert.ToBoolean(com.isEnable_Input);
+
+                int curWordValue_in = memory_block[in_word_offset];
+                string binaryStr_in = GetStringBinary(curWordValue_in);
+                int numberOf1_in = NumberOf1(curWordValue_in);
+                this.list_MemoryState[in_word_offset].Bit_used_str = binaryStr_in;
+                this.list_MemoryState[in_word_offset].Com_type = 2;
+                this.list_MemoryState[in_word_offset].State = numberOf1_in > 0;
+                this.list_MemoryState[in_word_offset].Used_count = numberOf1_in;
+
+                if (!isSameAddress)
+                {
+                    int curWordValue_out = memory_block[out_word_offset];
+                    string binaryStr_out = GetStringBinary(curWordValue_out);
+                    int numberOf1_out = NumberOf1(curWordValue_out);
+                    this.list_MemoryState[out_word_offset].Bit_used_str = binaryStr_out;
+                    this.list_MemoryState[out_word_offset].Com_type = 2;
+                    this.list_MemoryState[out_word_offset].State = numberOf1_out > 0;
+                    this.list_MemoryState[out_word_offset].Used_count = numberOf1_out;
+                }
+             }
+
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = this.list_MemoryState;
+        }
+
+
+        public string GetStringBinary(int value)
+        {
+            string binary_str = Convert.ToString(value, 2);
+            char[] binary_arr = binary_str.ToCharArray();
+            string bit_used_str = "";
+            foreach(var c in binary_arr)
+            {
+                bit_used_str = c + bit_used_str + " ";
+            }
+
+            return bit_used_str;
+        }
+
+        private int NumberOf1(int n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                count++;
+                n &= n - 1;
+            }
+            return count;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                int used_count = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells["Used_count"].Value);
+                if (used_count == 0)
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                }
+                else if ( used_count < 10 && used_count <= 3 )
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Green;
+                }
+                else if ( used_count <= 14 && used_count >= 10)
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if ( used_count > 14)
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
+            
         }
     }
 
