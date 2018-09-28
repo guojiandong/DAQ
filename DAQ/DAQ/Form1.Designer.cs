@@ -62,7 +62,8 @@
             this.outBitOffset,
             this.note});
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(1, 1);
+            this.listView1.Location = new System.Drawing.Point(-1, 1);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(999, 351);
             this.listView1.TabIndex = 0;
@@ -173,6 +174,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(1, 359);
             this.dataGridView1.Name = "dataGridView1";

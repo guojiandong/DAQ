@@ -49,8 +49,7 @@ namespace DAQ
             form_Btn.Name = "按钮类型";
             form_Btn.setBtnValue += new SetValueHandler(_setBtnValue);
             form_Btn.ChangeBtnState(form_Btn.isCreateMode);
-            form_Btn.ShowDialog(); //FormClosedEventHandler
-                                   // form_Btn.FormClosing += new FormClosingEventHandler(Form_BtnComponent_Closed);
+            form_Btn.ShowDialog();
         }
 
         public void Form_BtnComponent_Closed()
@@ -593,7 +592,7 @@ namespace DAQ
             string bit_used_str = "";
             foreach(var c in binary_arr)
             {
-                bit_used_str = c + bit_used_str + " ";
+                bit_used_str = c+ "  " + bit_used_str ;
             }
 
             return bit_used_str;
@@ -624,15 +623,15 @@ namespace DAQ
                 {
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
                 }
-                else if ( used_count < 10 && used_count <= 3 )
+                else if (used_count >= 1 && used_count < 10)
                 {
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Green;
                 }
-                else if ( used_count <= 14 && used_count >= 10)
+                else if (used_count >= 10 && used_count <= 14)
                 {
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
                 }
-                else if ( used_count > 14)
+                else if ( used_count > 15)
                 {
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
                 }
