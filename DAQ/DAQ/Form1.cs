@@ -31,6 +31,36 @@ namespace DAQ
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Console.WriteLine("listView1_SelectedIndexChanged");
+            List<string> comValue = new List<string>();
+            ListViewItem item = listView1.FocusedItem;
+            if (item == null)
+            {
+                MessageBox.Show(" 请选择一行 ！");
+                return;
+            }
+            for (int i = 0; i < item.SubItems.Count; i++)
+            {
+                comValue.Add(item.SubItems[i].Text);
+            }
+
+            int indexOfDataGridView = -1;
+            int componentType = int.Parse(comValue[0]);
+            if (componentType == (int)ComponentType.BtnComponent)
+            {
+                indexOfDataGridView = int.Parse(comValue[4]);
+
+            }
+            else if (componentType == (int)ComponentType.TextComponent)
+            {
+                indexOfDataGridView = int.Parse(comValue[5]);
+            }
+
+            if (indexOfDataGridView != -1)
+            {
+                if (dataGridView1.Rows.Count > (indexOfDataGridView))
+                    dataGridView1.Rows[indexOfDataGridView].Selected = true;
+            }
+
         }
 
         private void onAddTextComponent(object sender, EventArgs e)
@@ -359,9 +389,10 @@ namespace DAQ
             {
                 file = dialog.FileName;
             }
-            dataTable.WriteXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");//C:\Users\luxshare-ict\Desktop\I.work
+            // dataTable.WriteXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");//C:\Users\luxshare-ict\Desktop\I.work
+            dataTable.WriteXml(file);
             dataTable.Dispose();
-            MessageBox.Show("導出成功");
+            //MessageBox.Show("导出成功");
         }
 
 
@@ -369,7 +400,7 @@ namespace DAQ
         private void importXml_Click(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet();
-            /*
+            //*
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;//该值确定是否可以选择多个文件
             dialog.Title = "请选择文件夹";
@@ -380,28 +411,69 @@ namespace DAQ
             {
                 file = dialog.FileName;
             }
-            */
-
+            // */
             //"C:\\Users\\luxshare-ict\\Desktop\\ABC.xml"
-            dataSet.ReadXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");
+            // dataSet.ReadXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");
+            dataSet.ReadXml(file);
             DataTable dataTable = dataSet.Tables[0];
             listView1.Columns.Clear();
             listView1.Items.Clear();
+            this.dataGridView1.DataSource = null;
+            while (this.dataGridView1.Rows.Count != 0)
+            {
+                this.dataGridView1.Rows.RemoveAt(0);
+            }
+
+            List<Component> xmlComponents = new List<Component>();
+
+
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 listView1.Columns.Add(dataTable.Columns[i].ColumnName);
             }
+            List<string> curList = new List<string>();
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 ListViewItem listViewItem = new ListViewItem(dataTable.Rows[i][0].ToString());
+                curList.Clear();
+                curList.Add(dataTable.Rows[i][0].ToString());
                 for (int j = 1; j < dataTable.Columns.Count; j++)
                 {
+                    string value = dataTable.Rows[i][j].ToString();
+                    curList.Add(value);
                     listViewItem.SubItems.Add(dataTable.Rows[i][j].ToString());
                 }
+                // 构造 Component 数据结构 根据构造好的 Component 初始化数据
+                Component com = new Component();
+
+                com.componentType = int.Parse(curList[0]);
+                com.isEnable_Input = curList[1].ToString();
+                com.data_Type = DataType._16_int;
+                com.operatorType = OperatorType.Auto;
+                com.offset = curList[4].ToString();
+                com.in_word_offset = curList[5].ToString();
+                com.in_bit_offset = curList[6].ToString();
+                com.out_word_offset = curList[7].ToString();
+                com.out_bit_offset = curList[8].ToString();
+                com.note = curList[9].ToString();
+
+                xmlComponents.Add(com);
                 listView1.Items.Add(listViewItem);
             }
             dataTable.Dispose();
             dataSet.Dispose();
+
+            // 还原内存对应关系
+            foreach (var com in xmlComponents)
+            {
+                // 保存新的值到对应内存上
+                bool canInsert = canInsert2ListView(com, true);
+                if (!canInsert)
+                {
+                    return;
+                }
+                UpdateMemoryState(com);
+            }
         }
 
         private void ClearListView_Click(object sender, EventArgs e)

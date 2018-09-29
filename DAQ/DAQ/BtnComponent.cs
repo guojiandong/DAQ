@@ -95,17 +95,12 @@ namespace DAQ
             //reset
             this.checkBox1.Checked = false;
             this.comboBox1.SelectedIndex = 0;
-            this.offset.Text = "";
+           // this.offset.Text = "";
             this.note.Text = "";
             this.in_word_offset.Text = "";
             this.in_bit_offset.Text = "";
             this.out_word_offset.Text = "";
             this.out_bit_offset.Text = "";
-        }
-
-        private void offset_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -153,7 +148,6 @@ namespace DAQ
 
         public void InitUI(Component com)
         {
-            this.offset.Text = CheckEmpty( com.offset );
             this.note.Text = CheckEmpty( com.note );
             this.checkBox1.Checked = (bool)Convert.ToBoolean(com.isEnable_Input);
             this.comboBox1.SelectedIndex = (int)com.operatorType ;
@@ -168,7 +162,6 @@ namespace DAQ
             Component com = new Component();
             com.operatorType = (OperatorType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.BtnComponent;
-            string offset = this.offset.Text;
             string note = this.note.Text;
             bool sameAddress = this.checkBox1.Checked;
             com.isEnable_Input = sameAddress.ToString();
@@ -234,29 +227,57 @@ namespace DAQ
 
         }
 
-        private void in_word_offset_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void in_word_offset_label_Click(object sender, EventArgs e)
         {
+        }
 
+
+        private void in_word_offset_TextChanged(object sender, EventArgs e)
+        {
+            int iMax = 100;//首先设置上限值
+            if (in_word_offset.Text != null && in_word_offset.Text != "")//判断TextBox的内容不为空，如果不判断会导致后面的非数字对比异常
+            {
+                if (int.Parse(in_word_offset.Text) > iMax)//num就是传进来的值,如果大于上限（输入的值），那就强制为上限-1，或者就是上限值？
+                {
+                    in_word_offset.Text = (iMax - 1).ToString();
+                }
+            }
         }
 
         private void in_bit_offset_TextChanged(object sender, EventArgs e)
         {
-
+            int iMax = 17;//首先设置上限值
+            if (in_bit_offset.Text != null && in_bit_offset.Text != "")//判断TextBox的内容不为空，如果不判断会导致后面的非数字对比异常
+            {
+                if (int.Parse(in_bit_offset.Text) > iMax)//num就是传进来的值,如果大于上限（输入的值），那就强制为上限-1，或者就是上限值？
+                {
+                    in_bit_offset.Text = (iMax - 1).ToString();
+                }
+            }
         }
 
         private void out_word_offset_TextChanged(object sender, EventArgs e)
         {
-
+            int iMax = 100;//首先设置上限值
+            if (out_word_offset.Text != null && out_word_offset.Text != "")//判断TextBox的内容不为空，如果不判断会导致后面的非数字对比异常
+            {
+                if (int.Parse(out_word_offset.Text) > iMax)//num就是传进来的值,如果大于上限（输入的值），那就强制为上限-1，或者就是上限值？
+                {
+                    out_word_offset.Text = (iMax - 1).ToString();
+                }
+            }
         }
 
         private void out_bit_offset_TextChanged(object sender, EventArgs e)
         {
-
+            int iMax = 17;//首先设置上限值
+            if (out_bit_offset.Text != null && out_bit_offset.Text != "")//判断TextBox的内容不为空，如果不判断会导致后面的非数字对比异常
+            {
+                if (int.Parse(out_bit_offset.Text) > iMax)//num就是传进来的值,如果大于上限（输入的值），那就强制为上限-1，或者就是上限值？
+                {
+                    out_bit_offset.Text = (iMax - 1).ToString();
+                }
+            }
         }
 
         private void label5_Click_1(object sender, EventArgs e)
@@ -295,6 +316,46 @@ namespace DAQ
                 }
             }
             return false;
+        }
+
+        private void offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void out_word_offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void out_bit_offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void in_word_offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void in_bit_offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
         }
     }
 }

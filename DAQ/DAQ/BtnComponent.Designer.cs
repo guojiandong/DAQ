@@ -33,8 +33,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.offset = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.remove = new System.Windows.Forms.Button();
@@ -47,7 +45,6 @@
             this.in_bit_offset_label = new System.Windows.Forms.Label();
             this.out_bit_offset_label = new System.Windows.Forms.Label();
             this.out_word_offset_label = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -103,26 +100,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "操作类型";
             // 
-            // offset
-            // 
-            this.offset.Location = new System.Drawing.Point(91, 102);
-            this.offset.Name = "offset";
-            this.offset.Size = new System.Drawing.Size(121, 25);
-            this.offset.TabIndex = 5;
-            this.offset.TextChanged += new System.EventHandler(this.offset_TextChanged);
-            this.offset.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 105);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "偏移量";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            this.label2.Visible = false;
-            // 
             // note
             // 
             this.note.Location = new System.Drawing.Point(524, 61);
@@ -168,6 +145,7 @@
             this.in_word_offset.Size = new System.Drawing.Size(100, 25);
             this.in_word_offset.TabIndex = 11;
             this.in_word_offset.TextChanged += new System.EventHandler(this.in_word_offset_TextChanged);
+            this.in_word_offset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.in_word_offset_KeyPress);
             // 
             // in_bit_offset
             // 
@@ -176,6 +154,7 @@
             this.in_bit_offset.Size = new System.Drawing.Size(100, 25);
             this.in_bit_offset.TabIndex = 12;
             this.in_bit_offset.TextChanged += new System.EventHandler(this.in_bit_offset_TextChanged);
+            this.in_bit_offset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.in_bit_offset_KeyPress);
             // 
             // out_word_offset
             // 
@@ -184,6 +163,7 @@
             this.out_word_offset.Size = new System.Drawing.Size(100, 25);
             this.out_word_offset.TabIndex = 13;
             this.out_word_offset.TextChanged += new System.EventHandler(this.out_word_offset_TextChanged);
+            this.out_word_offset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.out_word_offset_KeyPress);
             // 
             // out_bit_offset
             // 
@@ -192,6 +172,7 @@
             this.out_bit_offset.Size = new System.Drawing.Size(100, 25);
             this.out_bit_offset.TabIndex = 14;
             this.out_bit_offset.TextChanged += new System.EventHandler(this.out_bit_offset_TextChanged);
+            this.out_bit_offset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.out_bit_offset_KeyPress);
             // 
             // in_word_offset_label
             // 
@@ -231,16 +212,6 @@
             this.out_word_offset_label.TabIndex = 18;
             this.out_word_offset_label.Text = "讀取字偏移";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(220, 105);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 15);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "（Text類型專用）";
-            this.label4.Visible = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -257,7 +228,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 342);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.out_word_offset_label);
             this.Controls.Add(this.out_bit_offset_label);
             this.Controls.Add(this.in_bit_offset_label);
@@ -270,8 +240,6 @@
             this.Controls.Add(this.remove);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.note);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.offset);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox1);
@@ -293,8 +261,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox offset;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox note;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button remove;
@@ -307,7 +273,6 @@
         private System.Windows.Forms.Label in_bit_offset_label;
         private System.Windows.Forms.Label out_bit_offset_label;
         private System.Windows.Forms.Label out_word_offset_label;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
     }
 }

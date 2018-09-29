@@ -112,6 +112,7 @@
             this.offset.Size = new System.Drawing.Size(100, 25);
             this.offset.TabIndex = 6;
             this.offset.TextChanged += new System.EventHandler(this.offset_TextChanged);
+            this.offset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.offset_KeyPress);
             // 
             // eventLog1
             // 

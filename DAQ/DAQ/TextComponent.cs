@@ -71,7 +71,14 @@ namespace DAQ
 
         private void offset_TextChanged(object sender, EventArgs e)
         {
-
+            int iMax = 100;//首先设置上限值
+            if (offset.Text != null && offset.Text != "")//判断TextBox的内容不为空，如果不判断会导致后面的非数字对比异常
+            {
+                if (int.Parse(offset.Text) > iMax)//num就是传进来的值,如果大于上限（输入的值），那就强制为上限-1，或者就是上限值？
+                {
+                    offset.Text = (iMax - 1).ToString();
+                }
+            }
         }
 
         private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
@@ -139,6 +146,14 @@ namespace DAQ
             this.offset.Text = com.offset;
             this.checkBox1.Checked = (bool)Convert.ToBoolean(com.isEnable_Input);
             this.comboBox1.SelectedIndex = (int)com.operatorType;
+        }
+
+        private void offset_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))//如果不是输入数字就不让输入
+            {
+                e.Handled = true;
+            }
         }
     }
 }
