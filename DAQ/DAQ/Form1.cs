@@ -60,7 +60,6 @@ namespace DAQ
                 if (dataGridView1.Rows.Count > (indexOfDataGridView))
                     dataGridView1.Rows[indexOfDataGridView].Selected = true;
             }
-
         }
 
         private void onAddTextComponent(object sender, EventArgs e)
@@ -109,6 +108,7 @@ namespace DAQ
             }
             Component com = new Component();
             int componentType = int.Parse(comValue[0]);
+            com.data_Type = (DataType)Enum.Parse(typeof(DataType), comValue[2]);
             com.componentType = componentType;
             if (componentType == (int)ComponentType.BtnComponent)
             {
@@ -129,6 +129,16 @@ namespace DAQ
                 com.isEnable_Input = comValue[1];
                 com.offset = comValue[4];
                 set_word_value(ref memory_block, int.Parse(comValue[4]), false);
+                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                {
+                    set_word_value(ref memory_block, int.Parse(comValue[4]) + 1, false);
+                }
+                else if (com.data_Type == DataType._int64)
+                {
+                    set_word_value(ref memory_block, int.Parse(comValue[4]) + 1, false);
+                    set_word_value(ref memory_block, int.Parse(comValue[4]) + 2, false);
+                    set_word_value(ref memory_block, int.Parse(comValue[4]) + 3, false);
+                }
             }
 
             int indexDel = listView1.Items.IndexOf(listView1.FocusedItem);
@@ -162,6 +172,17 @@ namespace DAQ
             {
                 int offset = int.Parse(comValue[4]);
                 set_word_value(ref memory_block, offset, false);
+
+                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                {
+                    set_word_value(ref memory_block, offset + 1, false);
+                }
+                else if (com.data_Type == DataType._int64)
+                {
+                    set_word_value(ref memory_block, offset + 1, false);
+                    set_word_value(ref memory_block, offset + 2, false);
+                    set_word_value(ref memory_block, offset + 3, false);
+                }
             }
 
             // 保存新的值到对应内存上
@@ -243,15 +264,52 @@ namespace DAQ
                 int offset = int.Parse(com.offset);
                 System.Console.WriteLine("Text offset: {0}", offset);
 
-                bool memoryUsed = check_word_used(ref memory_block, offset);
-                if (!memoryUsed || isOverrid)
-                {
-                    isSucc = memoryMapped(true, offset);
+                bool memoryUsed_right = check_word_used(ref memory_block, offset);
+                bool memoryUsed_left = check_word_used(ref memory_block, offset + 1);
+                if (com.data_Type == DataType._16_int || com.data_Type == DataType._16_uint){
+                    if (!memoryUsed_right || isOverrid)
+                    {
+                        isSucc = memoryMapped(true, offset);
+                    }
+                    else
+                    {
+                        MessageBox.Show("该内存已被占用，请选择其他内存");
+                        return false;
+                    }
                 }
-                else
+                else if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint )
                 {
-                    MessageBox.Show("该内存已被占用，请选择其他内存");
-                    return false;
+                    bool succ1 = false;
+                    bool succ2 = false;
+                    if ( ( !memoryUsed_right && !memoryUsed_left ) || isOverrid)
+                    {
+                        succ1 = memoryMapped(true, offset);
+                        succ2 = memoryMapped(true, offset + 1);
+                        isSucc = succ1 && succ2;
+                    }
+                    else
+                    {
+                        MessageBox.Show("该内存已被占用，请选择其他内存");
+                        return false;
+                    }
+                }
+                else if (com.data_Type == DataType._int64)
+                {
+                    bool memoryUsed_1 = check_word_used(ref memory_block, offset + 2);
+                    bool memoryUsed_2 = check_word_used(ref memory_block, offset + 3);
+                    if ((!memoryUsed_right && !memoryUsed_left && !memoryUsed_1 && !memoryUsed_2) || isOverrid)
+                    {
+                        bool succ1 = memoryMapped(true, offset);
+                        bool succ2 = memoryMapped(true, offset + 1);
+                        bool succ3 = memoryMapped(true, offset + 2);
+                        bool succ4 = memoryMapped(true, offset + 3);
+                        isSucc = succ1 && succ2 && succ3 && succ3;
+                    }
+                    else
+                    {
+                        MessageBox.Show("该内存已被占用，请选择其他内存");
+                        return false;
+                    }
                 }
             }
             else if (com.componentType == (int)ComponentType.BtnComponent)
@@ -450,8 +508,11 @@ namespace DAQ
 
                 com.componentType = int.Parse(curList[0]);
                 com.isEnable_Input = curList[1].ToString();
-                com.data_Type = DataType._16_int;
-                com.operatorType = OperatorType.Auto;
+                com.data_Type = (DataType)Enum.Parse(typeof(DataType), curList[2]);
+                if (ComponentType.BtnComponent == (ComponentType)com.componentType)
+                    com.operatorType = (OperatorType)(int.Parse(curList[3]));
+                else
+                    com.operatorType = OperatorType.Auto;
                 com.offset = curList[4].ToString();
                 com.in_word_offset = curList[5].ToString();
                 com.in_bit_offset = curList[6].ToString();
@@ -623,9 +684,51 @@ namespace DAQ
                 string binaryStr = GetStringBinary(curWordValue);
                 int numberOf1 = NumberOf1(curWordValue);
                 this.list_MemoryState[offset].Bit_used_str = binaryStr;
-                this.list_MemoryState[offset].Com_type = 1;
+                this.list_MemoryState[offset].Com_type = numberOf1 == 0 ? -1:1;
+
                 this.list_MemoryState[offset].State = numberOf1 > 0;
                 this.list_MemoryState[offset].Used_count = numberOf1;
+
+                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                {
+                    int curWordValue_1 = memory_block[offset];
+                    int curOffset = offset + 1;
+                    string binaryStr_1 = GetStringBinary(curWordValue_1);
+                    int numberOf1_1 = NumberOf1(curWordValue_1);
+                    this.list_MemoryState[curOffset].Bit_used_str = binaryStr_1;
+                    this.list_MemoryState[curOffset].Com_type = numberOf1_1 == 0 ? -1 : 1;
+                    this.list_MemoryState[curOffset].State = numberOf1_1 > 0;
+                    this.list_MemoryState[curOffset].Used_count = numberOf1_1;
+                }
+                else if (com.data_Type == DataType._int64)
+                {
+                    int curOffset_1 = offset + 1;
+                    int curWordValue_1 = memory_block[curOffset_1];
+                    string binaryStr_1 = GetStringBinary(curWordValue_1);
+                    int numberOf1_1 = NumberOf1(curWordValue_1);
+                    this.list_MemoryState[curOffset_1].Bit_used_str = binaryStr_1;
+                    this.list_MemoryState[curOffset_1].Com_type = numberOf1_1 == 0 ? -1 : 1;
+                    this.list_MemoryState[curOffset_1].State = numberOf1_1 > 0;
+                    this.list_MemoryState[curOffset_1].Used_count = numberOf1_1;
+
+                    int curOffset_2 = offset + 2;
+                    int curWordValue_2 = memory_block[curOffset_2];
+                    string binaryStr_2 = GetStringBinary(curWordValue_2);
+                    int numberOf1_2 = NumberOf1(curWordValue_2);
+                    this.list_MemoryState[curOffset_2].Bit_used_str = binaryStr_2;
+                    this.list_MemoryState[curOffset_2].Com_type = numberOf1_2 == 0 ? -1 : 1;
+                    this.list_MemoryState[curOffset_2].State = numberOf1_2 > 0;
+                    this.list_MemoryState[curOffset_2].Used_count = numberOf1_2;
+
+                    int curOffset_3 = offset + 3;
+                    int curWordValue_3 = memory_block[curOffset_3];
+                    string binaryStr_3 = GetStringBinary(curWordValue_3);
+                    int numberOf1_3 = NumberOf1(curWordValue_3);
+                    this.list_MemoryState[curOffset_3].Bit_used_str = binaryStr_3;
+                    this.list_MemoryState[curOffset_3].Com_type = numberOf1_3 == 0 ? -1 : 1;
+                    this.list_MemoryState[curOffset_3].State = numberOf1_3 > 0;
+                    this.list_MemoryState[curOffset_3].Used_count = numberOf1_3;
+                }
 
             }
             else if ( com.componentType == (int)ComponentType.BtnComponent)
@@ -638,7 +741,7 @@ namespace DAQ
                 string binaryStr_in = GetStringBinary(curWordValue_in);
                 int numberOf1_in = NumberOf1(curWordValue_in);
                 this.list_MemoryState[in_word_offset].Bit_used_str = binaryStr_in;
-                this.list_MemoryState[in_word_offset].Com_type = 2;
+                this.list_MemoryState[in_word_offset].Com_type = numberOf1_in > 0 ? -1: 2;
                 this.list_MemoryState[in_word_offset].State = numberOf1_in > 0;
                 this.list_MemoryState[in_word_offset].Used_count = numberOf1_in;
 
@@ -648,7 +751,7 @@ namespace DAQ
                     string binaryStr_out = GetStringBinary(curWordValue_out);
                     int numberOf1_out = NumberOf1(curWordValue_out);
                     this.list_MemoryState[out_word_offset].Bit_used_str = binaryStr_out;
-                    this.list_MemoryState[out_word_offset].Com_type = 2;
+                    this.list_MemoryState[out_word_offset].Com_type = numberOf1_out > 0? -1:2;
                     this.list_MemoryState[out_word_offset].State = numberOf1_out > 0;
                     this.list_MemoryState[out_word_offset].Used_count = numberOf1_out;
                 }

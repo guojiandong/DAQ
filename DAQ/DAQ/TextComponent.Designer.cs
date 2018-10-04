@@ -69,7 +69,8 @@
             "_uint_16,",
             "_int_16,",
             "_unit_32,",
-            "_int32"});
+            "_int32",
+            "_int64"});
             this.comboBox1.Location = new System.Drawing.Point(419, 65);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);

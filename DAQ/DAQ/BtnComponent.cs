@@ -200,7 +200,7 @@ namespace DAQ
             com.note = CheckEmpty(this.note.Text);
 
             if (UInt16.Parse(com.in_bit_offset) > 16  || UInt16.Parse(com.out_bit_offset) > 16 || 
-                UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 16 )
+                UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 99 )
             {
                 MessageBox.Show("请检查您的字偏移量不能大于100， 位偏移量不能大于16");
                 return;

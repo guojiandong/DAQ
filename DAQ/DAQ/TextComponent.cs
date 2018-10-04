@@ -32,7 +32,10 @@ namespace DAQ
             System.Console.WriteLine("onAddTextComponent");
             Component com = new Component();
             com.isEnable_Input = this.checkBox1.Checked.ToString();
-            com.data_Type = (DataType)this.comboBox1.SelectedIndex;
+            if (this.comboBox1.SelectedIndex == -1)
+                com.data_Type = 0;
+            else
+                com.data_Type = (DataType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.TextComponent;
             string offset = this.offset.Text;
             if (string.IsNullOrEmpty(offset))

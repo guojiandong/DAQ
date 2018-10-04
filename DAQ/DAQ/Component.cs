@@ -12,7 +12,7 @@ namespace DAQ
         _16_int,
         _32_uint,
         _32_int,
-        _float,
+        _int64,
     }
 
     public enum ChangeMode
