@@ -77,6 +77,13 @@ namespace DAQ
             com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
             com.note = CheckEmpty(this.note.Text);
             com.offset = "0";
+            if (this.pressstate.SelectedIndex == -1)
+                this.pressstate.SelectedIndex = 0;
+            com.pressType = (PressType)this.pressstate.SelectedIndex;
+
+            if (this.comboBox1.SelectedIndex == -1)
+                this.comboBox1.SelectedIndex = 0;
+            com.operatorType = (OperatorType)this.pressstate.SelectedIndex;
 
             if (UInt16.Parse(com.in_bit_offset) > 16 || UInt16.Parse(com.out_bit_offset) > 16 ||
                 UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 16)
@@ -101,6 +108,7 @@ namespace DAQ
             this.in_bit_offset.Text = "";
             this.out_word_offset.Text = "";
             this.out_bit_offset.Text = "";
+            this.pressstate.SelectedIndex = 0;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -155,6 +163,7 @@ namespace DAQ
             this.in_bit_offset.Text = CheckEmpty( com.in_bit_offset );
             this.out_word_offset.Text = CheckEmpty( com.out_word_offset );
             this.out_bit_offset.Text = CheckEmpty( com.out_bit_offset );
+            this.pressstate.SelectedIndex = (int)com.pressType;
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -198,6 +207,10 @@ namespace DAQ
             com.out_word_offset = CheckEmpty(this.out_word_offset.Text);
             com.out_bit_offset = CheckEmpty(this.out_bit_offset.Text);
             com.note = CheckEmpty(this.note.Text);
+            if (this.pressstate.SelectedIndex == -1)
+                this.pressstate.SelectedIndex = 0;
+            com.pressType = (PressType)pressstate.SelectedIndex;
+         
 
             if (UInt16.Parse(com.in_bit_offset) > 16  || UInt16.Parse(com.out_bit_offset) > 16 || 
                 UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 99 )
@@ -356,6 +369,16 @@ namespace DAQ
             {
                 e.Handled = true;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pressstate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

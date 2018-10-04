@@ -46,6 +46,8 @@
             this.out_bit_offset_label = new System.Windows.Forms.Label();
             this.out_word_offset_label = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.pressLabel = new System.Windows.Forms.Label();
+            this.pressstate = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // add
@@ -222,11 +224,34 @@
             this.label5.Text = "（Btn類型專用）";
             this.label5.Click += new System.EventHandler(this.label5_Click_1);
             // 
+            // pressLabel
+            // 
+            this.pressLabel.AutoSize = true;
+            this.pressLabel.Location = new System.Drawing.Point(446, 126);
+            this.pressLabel.Name = "pressLabel";
+            this.pressLabel.Size = new System.Drawing.Size(67, 15);
+            this.pressLabel.TabIndex = 22;
+            this.pressLabel.Text = "按钮状态";
+            // 
+            // pressstate
+            // 
+            this.pressstate.FormattingEnabled = true;
+            this.pressstate.Items.AddRange(new object[] {
+            "auto_up",
+            "keep"});
+            this.pressstate.Location = new System.Drawing.Point(524, 117);
+            this.pressstate.Name = "pressstate";
+            this.pressstate.Size = new System.Drawing.Size(121, 23);
+            this.pressstate.TabIndex = 23;
+            this.pressstate.SelectedIndexChanged += new System.EventHandler(this.pressstate_SelectedIndexChanged);
+            // 
             // BtnComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(885, 342);
+            this.Controls.Add(this.pressstate);
+            this.Controls.Add(this.pressLabel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.out_word_offset_label);
             this.Controls.Add(this.out_bit_offset_label);
@@ -274,5 +299,7 @@
         private System.Windows.Forms.Label out_bit_offset_label;
         private System.Windows.Forms.Label out_word_offset_label;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label pressLabel;
+        private System.Windows.Forms.ComboBox pressstate;
     }
 }

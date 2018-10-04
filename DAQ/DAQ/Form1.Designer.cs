@@ -45,6 +45,7 @@
             this.importXml = new System.Windows.Forms.Button();
             this.ClearListView = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.BtnPress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,12 +61,13 @@
             this.inBitOffset,
             this.outWordOffset,
             this.outBitOffset,
-            this.note});
+            this.note,
+            this.BtnPress});
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(-1, 1);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(999, 351);
+            this.listView1.Size = new System.Drawing.Size(1019, 351);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -188,6 +190,11 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
+            // BtnPress
+            // 
+            this.BtnPress.Text = "按钮状态";
+            this.BtnPress.Width = 80;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -227,6 +234,7 @@
         private System.Windows.Forms.ColumnHeader outBitOffset;
         private System.Windows.Forms.ColumnHeader note;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ColumnHeader BtnPress;
     }
 }
 

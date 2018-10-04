@@ -33,9 +33,9 @@ namespace DAQ
             Component com = new Component();
             com.isEnable_Input = this.checkBox1.Checked.ToString();
             if (this.comboBox1.SelectedIndex == -1)
-                com.data_Type = 0;
-            else
-                com.data_Type = (DataType)this.comboBox1.SelectedIndex;
+                this.comboBox1.SelectedIndex = 0;
+            com.data_Type = (DataType)this.comboBox1.SelectedIndex;
+
             com.componentType = (int)ComponentType.TextComponent;
             string offset = this.offset.Text;
             if (string.IsNullOrEmpty(offset))
@@ -102,8 +102,11 @@ namespace DAQ
         private void save_Click(object sender, EventArgs e)
         {
             Component com = new Component();
-            com.operatorType = (OperatorType)this.comboBox1.SelectedIndex;
+            if (this.comboBox1.SelectedIndex == -1)
+                this.comboBox1.SelectedIndex = 0;
+            com.data_Type = (DataType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.TextComponent;
+            com.operatorType = OperatorType.Auto; 
             string offset = this.offset.Text;
             bool checkState = this.checkBox1.Checked;
             com.isEnable_Input = checkState.ToString();

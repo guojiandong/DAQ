@@ -204,6 +204,7 @@ namespace DAQ
             item.SubItems[7].Text = CheckEmpty(com.out_word_offset);
             item.SubItems[8].Text = CheckEmpty(com.out_bit_offset);
             item.SubItems[9].Text = CheckEmpty(com.note);
+            item.SubItems[10].Text = CheckEmpty(com.pressType.ToString());
             UpdateMemoryState(com);
         }
 
@@ -227,6 +228,7 @@ namespace DAQ
             lt.SubItems.Add(CheckEmpty(com.out_word_offset));
             lt.SubItems.Add(CheckEmpty(com.out_bit_offset));
             lt.SubItems.Add(CheckEmpty(com.note));
+            lt.SubItems.Add(CheckEmpty(com.pressType.ToString()));
 
             this.listView1.Items.Add(lt);
             UpdateMemoryState(com);
@@ -386,8 +388,9 @@ namespace DAQ
                     com.in_bit_offset = comValue[6];
                     com.out_word_offset = comValue[7];
                     com.out_bit_offset = comValue[8];
-                    if (comValue.Count >= 9 && !string.IsNullOrEmpty(comValue[8]))
-                        com.note = comValue[8];
+                    if (comValue.Count >= 9 && !string.IsNullOrEmpty(comValue[9]))
+                        com.note = comValue[9];
+                    com.pressType = (PressType)Enum.Parse(typeof(PressType), comValue[10]);
 
                     form2.InitUI(com);
                     form2.ShowDialog();
@@ -443,15 +446,26 @@ namespace DAQ
                 dataTable.Rows.Add(dataRow);
             }
 
-            OpenFileDialog dialog = new OpenFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Xml文件（*.xml）| *.xml";
+            dialog.InitialDirectory = "C:\\Users\\luxshare-ict\\Desktop";
+            dialog.RestoreDirectory = true;
             string file = string.Empty;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 file = dialog.FileName;
             }
             // dataTable.WriteXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");//C:\Users\luxshare-ict\Desktop\I.work
+            if( string.IsNullOrEmpty(file))
+            {
+                MessageBox.Show("请选择文件夹");
+                return;
+            }
             dataTable.WriteXml(file);
             dataTable.Dispose();
+
+            //string xml = XmlUtil.Serializer(typeof(List<Component>), list1);
+            //Console.Write(xml);
             //MessageBox.Show("导出成功");
         }
 
@@ -462,18 +476,25 @@ namespace DAQ
             DataSet dataSet = new DataSet();
             //*
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = false;//该值确定是否可以选择多个文件
+            dialog.InitialDirectory = "C:\\Users\\luxshare-ict\\Desktop";
+            dialog.Filter = "Xml文件（*.xml）| *.xml";
+            dialog.FilterIndex = 1;
+            dialog.RestoreDirectory = true;
             dialog.Title = "请选择文件夹";
-            dialog.Filter = "所有xml文件(*.*)|*.xml";
             string file = string.Empty;
-             
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+          
+            if (dialog.ShowDialog() == DialogResult.OK && dialog.FileName.Length > 0)
             {
-                file = dialog.FileName;
+                file = dialog.FileName.ToString(); //获得文件路径 
             }
             // */
             //"C:\\Users\\luxshare-ict\\Desktop\\ABC.xml"
             // dataSet.ReadXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");
+            if (string.IsNullOrEmpty(file))
+            {
+                MessageBox.Show("请选择xml文件");
+                return;
+            }
             dataSet.ReadXml(file);
             DataTable dataTable = dataSet.Tables[0];
             listView1.Columns.Clear();
@@ -510,7 +531,10 @@ namespace DAQ
                 com.isEnable_Input = curList[1].ToString();
                 com.data_Type = (DataType)Enum.Parse(typeof(DataType), curList[2]);
                 if (ComponentType.BtnComponent == (ComponentType)com.componentType)
-                    com.operatorType = (OperatorType)(int.Parse(curList[3]));
+                {
+                    com.operatorType = (OperatorType)Enum.Parse(typeof(OperatorType), curList[3]);
+                    com.pressType = (PressType)Enum.Parse(typeof(PressType), curList[10]);
+                }
                 else
                     com.operatorType = OperatorType.Auto;
                 com.offset = curList[4].ToString();

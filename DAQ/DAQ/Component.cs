@@ -33,6 +33,12 @@ namespace DAQ
         Manual = 1,
     }
 
+    public enum PressType
+    {
+        Auto_Up = 0,
+        Keep = 1,
+    }
+
     public class Component
     {
         public string Id ;   
@@ -49,6 +55,8 @@ namespace DAQ
 
         public string out_word_offset;// 讀出字偏移
         public string out_bit_offset; // 讀出位偏移
+
+        public PressType pressType = PressType.Auto_Up; // 按钮按下后的状态
 
 
         /*
