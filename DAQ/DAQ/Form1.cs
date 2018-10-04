@@ -741,7 +741,7 @@ namespace DAQ
                 string binaryStr_in = GetStringBinary(curWordValue_in);
                 int numberOf1_in = NumberOf1(curWordValue_in);
                 this.list_MemoryState[in_word_offset].Bit_used_str = binaryStr_in;
-                this.list_MemoryState[in_word_offset].Com_type = numberOf1_in > 0 ? -1: 2;
+                this.list_MemoryState[in_word_offset].Com_type = numberOf1_in == 0 ? -1: 2;
                 this.list_MemoryState[in_word_offset].State = numberOf1_in > 0;
                 this.list_MemoryState[in_word_offset].Used_count = numberOf1_in;
 
@@ -751,7 +751,7 @@ namespace DAQ
                     string binaryStr_out = GetStringBinary(curWordValue_out);
                     int numberOf1_out = NumberOf1(curWordValue_out);
                     this.list_MemoryState[out_word_offset].Bit_used_str = binaryStr_out;
-                    this.list_MemoryState[out_word_offset].Com_type = numberOf1_out > 0? -1:2;
+                    this.list_MemoryState[out_word_offset].Com_type = numberOf1_out == 0? -1:2;
                     this.list_MemoryState[out_word_offset].State = numberOf1_out > 0;
                     this.list_MemoryState[out_word_offset].Used_count = numberOf1_out;
                 }
