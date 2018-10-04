@@ -95,6 +95,7 @@
             this.label1.Size = new System.Drawing.Size(67, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "数据类型";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 

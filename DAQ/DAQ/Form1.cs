@@ -35,7 +35,7 @@ namespace DAQ
             ListViewItem item = listView1.FocusedItem;
             if (item == null)
             {
-                MessageBox.Show(" 请选择一行 ！");
+                //MessageBox.Show(" 请选择一行 ！");
                 return;
             }
             for (int i = 0; i < item.SubItems.Count; i++)
@@ -126,6 +126,8 @@ namespace DAQ
             }
             else if (componentType == (int)ComponentType.TextComponent)
             {
+                com.isEnable_Input = comValue[1];
+                com.offset = comValue[4];
                 set_word_value(ref memory_block, int.Parse(comValue[4]), false);
             }
 

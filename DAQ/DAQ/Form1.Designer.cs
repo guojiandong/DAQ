@@ -79,7 +79,7 @@
             // 
             // enable
             // 
-            this.enable.Text = "允許輸入|寫入讀取地址不同";
+            this.enable.Text = "允许输入|写入读取地址相同";
             this.enable.Width = 218;
             // 
             // dataType
@@ -99,27 +99,27 @@
             // 
             // inWordOffset
             // 
-            this.inWordOffset.Text = "寫入字偏移";
+            this.inWordOffset.Text = "写入字偏移";
             this.inWordOffset.Width = 96;
             // 
             // inBitOffset
             // 
-            this.inBitOffset.Text = "寫入位偏移";
+            this.inBitOffset.Text = "写入位偏移";
             this.inBitOffset.Width = 92;
             // 
             // outWordOffset
             // 
-            this.outWordOffset.Text = "讀出字偏移";
+            this.outWordOffset.Text = "读出字偏移";
             this.outWordOffset.Width = 90;
             // 
             // outBitOffset
             // 
-            this.outBitOffset.Text = "讀出位偏移";
+            this.outBitOffset.Text = "读出位偏移";
             this.outBitOffset.Width = 103;
             // 
             // note
             // 
-            this.note.Text = "注釋";
+            this.note.Text = "注释";
             this.note.Width = 114;
             // 
             // Add
@@ -138,7 +138,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "新增按鈕";
+            this.button1.Text = "新增按钮";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.onAddBtnComponent);
             // 
@@ -148,7 +148,7 @@
             this.exportXml.Name = "exportXml";
             this.exportXml.Size = new System.Drawing.Size(75, 23);
             this.exportXml.TabIndex = 4;
-            this.exportXml.Text = "導出xml";
+            this.exportXml.Text = "导出xml";
             this.exportXml.UseVisualStyleBackColor = true;
             this.exportXml.Click += new System.EventHandler(this.exportXml_Click);
             // 
@@ -158,7 +158,7 @@
             this.importXml.Name = "importXml";
             this.importXml.Size = new System.Drawing.Size(75, 23);
             this.importXml.TabIndex = 6;
-            this.importXml.Text = "導入xml";
+            this.importXml.Text = "导入xml";
             this.importXml.UseVisualStyleBackColor = true;
             this.importXml.Click += new System.EventHandler(this.importXml_Click);
             // 
