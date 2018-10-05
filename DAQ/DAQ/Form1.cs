@@ -81,9 +81,7 @@ namespace DAQ
         }
 
         public void Form_BtnComponent_Closed()
-        {
-
-        }
+        {}
         public void _setTextValue(Component com)
         {
             System.Console.WriteLine("_setTextValue text Type isEnable_Input:{0}, data_Type: {1}", com.isEnable_Input, com.data_Type);
@@ -210,7 +208,6 @@ namespace DAQ
             item.SubItems[10].Text = CheckEmpty(com.pressType.ToString());
             item.SubItems[11].Text = CheckEmpty(com.point.ToString());
 
-
             //移除旧的内存关系
             Component com_del = new Component();
             com_del.componentType   = int.Parse(comValue[0]);
@@ -255,7 +252,6 @@ namespace DAQ
             this.listView1.Items.Add(lt);
             UpdateMemoryState(com);
         }
-
 
         // 检测该控件是否可以插入对应地址
         public bool canInsert2ListView(Component com, bool isOverrid)
@@ -439,14 +435,11 @@ namespace DAQ
                     form2.InitUI(com);
                     form2.ShowDialog();
                 }
-
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void exportXml_Click(object sender, EventArgs e)
         {
@@ -498,15 +491,16 @@ namespace DAQ
 
         private void importXml_Click(object sender, EventArgs e)
         {
-            string fileName = string.Empty; //文件名
+            string fileName = string.Empty;
             //打开文件
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.DefaultExt = "xml";
             dlg.Filter = "xml Files|*.xml";
             if (dlg.ShowDialog() == DialogResult.OK)
                 fileName = dlg.FileName;
-            if (fileName == null)
+            if (string.IsNullOrEmpty(fileName))
                 return;
+
             //读取文件内容
             StreamReader sr = new StreamReader(fileName, System.Text.Encoding.Default);
             String xml = sr.ReadToEnd().TrimStart();
@@ -515,12 +509,11 @@ namespace DAQ
             List<Component> list2 = XmlUtil.Deserialize(typeof(List<Component>), xml) as List<Component>;
             if (list2 == null)
             {
-                MessageBox.Show("反序列化错误！");
+                MessageBox.Show("反序列化错误！请检查您的XML文件内容及格式 ...");
                 return;
             }
             foreach (Component com in list2)
             {
-
                 // 保存新的值到对应内存上
                 //bool canInsert = canInsert2ListView(com, true);
                 //if (!canInsert)
@@ -668,7 +661,6 @@ namespace DAQ
             return -1;
         }
 
-
         //------------------------------------------------------------- 占用内存查看 DataGridView --------------------------------------//
         /*****
          * Color : UInt16
@@ -806,9 +798,7 @@ namespace DAQ
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        {}
 
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -832,7 +822,6 @@ namespace DAQ
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
                 }
             }
-            
         }
     }
 

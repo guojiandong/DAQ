@@ -36,7 +36,6 @@ namespace DAQ
             }
             catch (Exception e)
             {
-
                 return null;
             }
         }
@@ -83,7 +82,6 @@ namespace DAQ
 
             return str;
         }
-
         #endregion
     }
 }

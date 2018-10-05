@@ -58,7 +58,6 @@ namespace DAQ
         private void onReset(object sender, EventArgs e)
         {
             System.Console.WriteLine("onReset Text Component");
-
             //reset 
             this.checkBox1.Checked = false;
             this.comboBox1.SelectedIndex = 0;
@@ -73,14 +72,10 @@ namespace DAQ
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void offset_TextChanged(object sender, EventArgs e)
         {
@@ -95,9 +90,7 @@ namespace DAQ
         }
 
         private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
-        {
-
-        }
+        {}
 
         private void TextComponent_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -127,7 +120,6 @@ namespace DAQ
                 this.point.Text = "0";
             }
             com.point = int.Parse(this.point.Text);
-
 
             if (string.IsNullOrEmpty(offset))
             {
@@ -182,13 +174,9 @@ namespace DAQ
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
+        {}
     }
 }

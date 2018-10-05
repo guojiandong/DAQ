@@ -23,7 +23,6 @@ namespace DAQ
         _32_Float = 10,
     }
 
-    [Serializable]
     public enum ChangeMode
     {
         Create = 0,
@@ -156,7 +155,6 @@ namespace DAQ
             this.com_type = type;
             this.state = state;
             this.bit_used_str = use_str;
-            
         }
     }
     

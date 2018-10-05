@@ -24,14 +24,10 @@ namespace DAQ
         }
 
         private void BtnComponent_Load(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void onAddBtnComponent(object sender, EventArgs e)
         {
@@ -54,7 +50,8 @@ namespace DAQ
                         MessageBox.Show("讀取，寫入偏移量均不能为空");
                         return;
                     }
-            }else    // 相同的寫入讀取地址，可以值寫一行
+            }
+            else    // 相同的寫入讀取地址，可以值寫一行
             {
                 if (string.IsNullOrEmpty(this.in_bit_offset.Text) || string.IsNullOrEmpty(this.in_word_offset.Text))
                 {
@@ -92,17 +89,14 @@ namespace DAQ
                 return;
             }
 
-
             if (this.setBtnValue != null)
                 this.setBtnValue(com);
         }
 
         private void onResetBtn(object sender, EventArgs e)
         {
-            //reset
             this.checkBox1.Checked = false;
             this.comboBox1.SelectedIndex = 0;
-           // this.offset.Text = "";
             this.note.Text = "";
             this.in_word_offset.Text = "";
             this.in_bit_offset.Text = "";
@@ -112,14 +106,10 @@ namespace DAQ
         }
 
         private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void note_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void BtnComponent_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -210,7 +200,6 @@ namespace DAQ
             if (this.pressstate.SelectedIndex == -1)
                 this.pressstate.SelectedIndex = 0;
             com.pressType = (PressType)pressstate.SelectedIndex;
-         
 
             if (UInt16.Parse(com.in_bit_offset) > 16  || UInt16.Parse(com.out_bit_offset) > 16 || 
                 UInt16.Parse(com.out_word_offset) > 99 || UInt16.Parse(com.in_word_offset) > 99 )
@@ -226,23 +215,16 @@ namespace DAQ
         }
 
         public void Form_BtnComponent_Closed()
-        {
-
-        }
+        {}
 
         private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void in_word_offset_label_Click(object sender, EventArgs e)
-        {
-        }
+        {}
 
 
         private void in_word_offset_TextChanged(object sender, EventArgs e)
@@ -294,9 +276,7 @@ namespace DAQ
         }
 
         private void label5_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -311,7 +291,6 @@ namespace DAQ
             if (string.IsNullOrEmpty(value))
                 return str;
             return value;
-
         }
 
         public bool isSameOffsetValue()
@@ -372,13 +351,9 @@ namespace DAQ
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void pressstate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
     }
 }
