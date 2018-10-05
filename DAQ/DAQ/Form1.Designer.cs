@@ -39,13 +39,14 @@
             this.outWordOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.outBitOffset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.note = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BtnPress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Add = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.exportXml = new System.Windows.Forms.Button();
             this.importXml = new System.Windows.Forms.Button();
             this.ClearListView = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BtnPress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Point = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,8 @@
             this.outWordOffset,
             this.outBitOffset,
             this.note,
-            this.BtnPress});
+            this.BtnPress,
+            this.Point});
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(-1, 1);
             this.listView1.MultiSelect = false;
@@ -123,6 +125,11 @@
             // 
             this.note.Text = "注释";
             this.note.Width = 114;
+            // 
+            // BtnPress
+            // 
+            this.BtnPress.Text = "按钮状态";
+            this.BtnPress.Width = 80;
             // 
             // Add
             // 
@@ -190,10 +197,9 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             // 
-            // BtnPress
+            // Point
             // 
-            this.BtnPress.Text = "按钮状态";
-            this.BtnPress.Width = 80;
+            this.Point.Text = "小数位";
             // 
             // Form1
             // 
@@ -235,6 +241,7 @@
         private System.Windows.Forms.ColumnHeader note;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ColumnHeader BtnPress;
+        private System.Windows.Forms.ColumnHeader Point;
     }
 }
 

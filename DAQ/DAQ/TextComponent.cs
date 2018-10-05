@@ -21,6 +21,7 @@ namespace DAQ
         {
             InitializeComponent();
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.point.Enabled = false;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -37,6 +38,12 @@ namespace DAQ
             com.data_Type = (DataType)this.comboBox1.SelectedIndex;
 
             com.componentType = (int)ComponentType.TextComponent;
+            string point = this.point.Text;
+            if (string.IsNullOrEmpty(point))
+            {
+                this.point.Text = "0";
+            }
+            com.point = int.Parse(this.point.Text);
             string offset = this.offset.Text;
             if (string.IsNullOrEmpty(offset))
             {
@@ -55,11 +62,14 @@ namespace DAQ
             //reset 
             this.checkBox1.Checked = false;
             this.comboBox1.SelectedIndex = 0;
+            this.point.Enabled = false;
+            this.point.Text = "0";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Console.WriteLine("comboBox1_SelectedIndexChanged");
+            this.point.Enabled = (this.comboBox1.SelectedIndex == (int)DataType._32_Float);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -110,6 +120,15 @@ namespace DAQ
             string offset = this.offset.Text;
             bool checkState = this.checkBox1.Checked;
             com.isEnable_Input = checkState.ToString();
+
+            string point = this.point.Text;
+            if (string.IsNullOrEmpty(point))
+            {
+                this.point.Text = "0";
+            }
+            com.point = int.Parse(this.point.Text);
+
+
             if (string.IsNullOrEmpty(offset))
             {
                 MessageBox.Show("偏移量不能为空");
@@ -163,6 +182,11 @@ namespace DAQ
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
         }

@@ -29,6 +29,7 @@ namespace DAQ
             InitMemoryState();
         }
 
+        //  点击listview 中的一行， 调到与之向对应的datagridview 某一行
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Console.WriteLine("listView1_SelectedIndexChanged");
@@ -36,7 +37,6 @@ namespace DAQ
             ListViewItem item = listView1.FocusedItem;
             if (item == null)
             {
-                //MessageBox.Show(" 请选择一行 ！");
                 return;
             }
             for (int i = 0; i < item.SubItems.Count; i++)
@@ -47,21 +47,16 @@ namespace DAQ
             int indexOfDataGridView = -1;
             int componentType = int.Parse(comValue[0]);
             if (componentType == (int)ComponentType.BtnComponent)
-            {
                 indexOfDataGridView = int.Parse(comValue[5]);
-
-            }
             else if (componentType == (int)ComponentType.TextComponent)
-            {
                 indexOfDataGridView = int.Parse(comValue[4]);
-            }
 
             if (indexOfDataGridView != -1)
             {
                 if (dataGridView1.Rows.Count > (indexOfDataGridView))
                 {
                     dataGridView1.ClearSelection();
-                    dataGridView1.FirstDisplayedScrollingRowIndex = indexOfDataGridView - 3;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = indexOfDataGridView;
                     dataGridView1.Rows[indexOfDataGridView].Selected = true;
                 }
             }
@@ -74,7 +69,6 @@ namespace DAQ
             form_Text.setTextValue += new SetValueHandler(_setTextValue);
             form_Text.ChangeBtnState(form_Text.isCreateMode);
             form_Text.ShowDialog();
-
         }
 
         private void onAddBtnComponent(object sender, EventArgs e)
@@ -102,6 +96,7 @@ namespace DAQ
             AddComponent(com);
         }
 
+        // 数据删除的回调
         public void _removeHandler()
         {
             //从内存映射表中删除
@@ -152,6 +147,8 @@ namespace DAQ
             UpdateMemoryState(com);
         }
 
+
+        // 数据更改的回调
         public void _saveHandler(Component com)
         {
             //擦除内存上的旧值
@@ -211,6 +208,8 @@ namespace DAQ
             item.SubItems[8].Text = CheckEmpty(com.out_bit_offset);
             item.SubItems[9].Text = CheckEmpty(com.note);
             item.SubItems[10].Text = CheckEmpty(com.pressType.ToString());
+            item.SubItems[11].Text = CheckEmpty(com.point.ToString());
+
 
             //移除旧的内存关系
             Component com_del = new Component();
@@ -223,6 +222,7 @@ namespace DAQ
             com_del.out_word_offset = comValue[7];
             com_del.out_bit_offset  = comValue[8];
 
+            //移除旧的内存映射
             UpdateMemoryState(com_del);
 
             //添加新的内存映射
@@ -250,6 +250,7 @@ namespace DAQ
             lt.SubItems.Add(CheckEmpty(com.out_bit_offset));
             lt.SubItems.Add(CheckEmpty(com.note));
             lt.SubItems.Add(CheckEmpty(com.pressType.ToString()));
+            lt.SubItems.Add(CheckEmpty(com.point.ToString()));
 
             this.listView1.Items.Add(lt);
             UpdateMemoryState(com);
@@ -433,6 +434,7 @@ namespace DAQ
                     com.isEnable_Input = comValue[1];
                     com.data_Type = (DataType)Enum.Parse(typeof(DataType), comValue[2]);
                     com.offset = comValue[4];
+                    com.point = int.Parse(comValue[11]);
 
                     form2.InitUI(com);
                     form2.ShowDialog();
@@ -466,15 +468,16 @@ namespace DAQ
                 com.out_bit_offset =  (item.SubItems[8].Text);
                 com.note =  (item.SubItems[9].Text);
                 com.pressType =  (PressType)Enum.Parse(typeof(PressType), item.SubItems[10].Text);
+                com.point = int.Parse(item.SubItems[11].Text);
                 list1.Add(com);
             }
 
             // 序列化
             string xml = XmlUtil.Serializer(typeof(List<Component>), list1);
-            Console.Write(xml);
+            //Console.Write(xml);
 
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = @"C:\Users\SpringRain\Desktop";
+            sfd.InitialDirectory = @"C: \Users\luxshare - ict\Desktop"; 
             sfd.Title = "请选择要保存的文件路径";
             sfd.Filter = "文本文件|*.xml|所有文件|*.*";
             sfd.ShowDialog();
@@ -529,148 +532,7 @@ namespace DAQ
             }
         }
 
-        //把ListView数据写入XML
-        private void exportXml_Click1(object sender, EventArgs e)
-        {
-            DataTable dataTable = new DataTable("Test");
-            for (int i = 0; i < listView1.Columns.Count; i++)
-            {
-                dataTable.Columns.Add(listView1.Columns[i].Text);
-            }
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                ListViewItem listViewItem = listView1.Items[i];
-                int curLineCount = listViewItem.SubItems.Count;
-                for (int j = 0; j < listView1.Columns.Count; ++j)
-                {
-                    if (j < curLineCount)
-                        dataRow[j] = listView1.Items[i].SubItems[j].Text;
-                    else
-                        dataRow[j] = "空值";
-                }
-                dataTable.Rows.Add(dataRow);
-            }
-
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Xml文件（*.xml）| *.xml";
-            dialog.InitialDirectory = "C:\\Users\\luxshare-ict\\Desktop";
-            dialog.RestoreDirectory = true;
-            string file = string.Empty;
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                file = dialog.FileName;
-            }
-            // dataTable.WriteXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");//C:\Users\luxshare-ict\Desktop\I.work
-            if( string.IsNullOrEmpty(file))
-            {
-                MessageBox.Show("请选择文件夹");
-                return;
-            }
-            dataTable.WriteXml(file);
-            dataTable.Dispose();
-
-            //string xml = XmlUtil.Serializer(typeof(List<Component>), list1);
-            //Console.Write(xml);
-            //MessageBox.Show("导出成功");
-        }
-
-
-        //把XML数据读入ListView
-        private void importXml_Click1(object sender, EventArgs e)
-        {
-            DataSet dataSet = new DataSet();
-            //*
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.InitialDirectory = "C:\\Users\\luxshare-ict\\Desktop";
-            dialog.Filter = "Xml文件（*.xml）| *.xml";
-            dialog.FilterIndex = 1;
-            dialog.RestoreDirectory = true;
-            dialog.Title = "请选择文件夹";
-            string file = string.Empty;
-          
-            if (dialog.ShowDialog() == DialogResult.OK && dialog.FileName.Length > 0)
-            {
-                file = dialog.FileName.ToString(); //获得文件路径 
-            }
-            // */
-            //"C:\\Users\\luxshare-ict\\Desktop\\ABC.xml"
-            // dataSet.ReadXml("C:\\Users\\luxshare-ict\\Desktop\\ABC.xml");
-            if (string.IsNullOrEmpty(file))
-            {
-                MessageBox.Show("请选择xml文件");
-                return;
-            }
-            dataSet.ReadXml(file);
-            DataTable dataTable = dataSet.Tables[0];
-            listView1.Columns.Clear();
-            listView1.Items.Clear();
-            this.dataGridView1.DataSource = null;
-            while (this.dataGridView1.Rows.Count != 0)
-            {
-                this.dataGridView1.Rows.RemoveAt(0);
-            }
-
-            List<Component> xmlComponents = new List<Component>();
-
-
-            for (int i = 0; i < dataTable.Columns.Count; i++)
-            {
-                listView1.Columns.Add(dataTable.Columns[i].ColumnName);
-            }
-            List<string> curList = new List<string>();
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                ListViewItem listViewItem = new ListViewItem(dataTable.Rows[i][0].ToString());
-                curList.Clear();
-                curList.Add(dataTable.Rows[i][0].ToString());
-                for (int j = 1; j < dataTable.Columns.Count; j++)
-                {
-                    string value = dataTable.Rows[i][j].ToString();
-                    curList.Add(value);
-                    listViewItem.SubItems.Add(dataTable.Rows[i][j].ToString());
-                }
-                // 构造 Component 数据结构 根据构造好的 Component 初始化数据
-                Component com = new Component();
-
-                com.componentType = int.Parse(curList[0]);
-                com.isEnable_Input = curList[1].ToString();
-                com.data_Type = (DataType)Enum.Parse(typeof(DataType), curList[2]);
-                if (ComponentType.BtnComponent == (ComponentType)com.componentType)
-                {
-                    com.operatorType = (OperatorType)Enum.Parse(typeof(OperatorType), curList[3]);
-                    com.pressType = (PressType)Enum.Parse(typeof(PressType), curList[10]);
-                }
-                else
-                    com.operatorType = OperatorType._On;
-                com.offset = curList[4].ToString();
-                com.in_word_offset = curList[5].ToString();
-                com.in_bit_offset = curList[6].ToString();
-                com.out_word_offset = curList[7].ToString();
-                com.out_bit_offset = curList[8].ToString();
-                com.note = curList[9].ToString();
-
-                xmlComponents.Add(com);
-                listView1.Items.Add(listViewItem);
-            }
-            dataTable.Dispose();
-            dataSet.Dispose();
-
-            // 还原内存对应关系
-            foreach (var com in xmlComponents)
-            {
-                // 保存新的值到对应内存上
-                bool canInsert = canInsert2ListView(com, true);
-                if (!canInsert)
-                {
-                    return;
-                }
-                UpdateMemoryState(com);
-            }
-        }
-
-
-
+        //清空listview
         private void ClearListView_Click(object sender, EventArgs e)
         {
             this.listView1.Items.Clear();
@@ -678,6 +540,7 @@ namespace DAQ
             InitMemoryState();
         }
 
+        // 检查是否为空
         public static string CheckEmpty(string value)
         {
             string str = "0";
@@ -725,7 +588,7 @@ namespace DAQ
         {
             if (indexOfBit > 16)  //索引出错
             {
-                MessageBox.Show("位索引不能大于15！");
+                MessageBox.Show("位索引不能大于16！");
                 return false;
             }
 
@@ -781,6 +644,7 @@ namespace DAQ
             return false;
         }
 
+        // 检查 数据类型 0 ： 16 bit ， 1 ： 32bit 整数， 2：32bit Float ， 3 ： 64bit  
         public static int CheckDataType(DataType data_type)
         {
             if (data_type == DataType._16_BCD || data_type == DataType._16_Binary || data_type == DataType._16_Hex ||

@@ -38,6 +38,8 @@
             this.eventLog1 = new System.Diagnostics.EventLog();
             this.save = new System.Windows.Forms.Button();
             this.remove = new System.Windows.Forms.Button();
+            this.point = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +79,7 @@
             "_32_Unsigned = 8,",
             "_32_Signed = 9,",
             " _32_Float = 10"});
-            this.comboBox1.Location = new System.Drawing.Point(419, 65);
+            this.comboBox1.Location = new System.Drawing.Point(247, 18);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);
             this.comboBox1.TabIndex = 2;
@@ -86,7 +88,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(173, 71);
+            this.checkBox1.Location = new System.Drawing.Point(28, 21);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(119, 19);
             this.checkBox1.TabIndex = 3;
@@ -97,7 +99,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(345, 70);
+            this.label1.Location = new System.Drawing.Point(172, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 15);
             this.label1.TabIndex = 4;
@@ -147,11 +149,30 @@
             this.remove.UseVisualStyleBackColor = true;
             this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
+            // point
+            // 
+            this.point.Location = new System.Drawing.Point(484, 17);
+            this.point.Name = "point";
+            this.point.Size = new System.Drawing.Size(100, 25);
+            this.point.TabIndex = 9;
+            this.point.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(394, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "小数点位数";
+            // 
             // TextComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(713, 238);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.point);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.save);
             this.Controls.Add(this.offset);
@@ -184,5 +205,7 @@
         private System.Diagnostics.EventLog eventLog1;
         private System.Windows.Forms.Button remove;
         private System.Windows.Forms.Button save;
+        private System.Windows.Forms.TextBox point;
+        private System.Windows.Forms.Label label3;
     }
 }

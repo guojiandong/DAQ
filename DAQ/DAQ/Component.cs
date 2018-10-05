@@ -51,13 +51,12 @@ namespace DAQ
     {
         Auto_Up = 0,
         Keep = 1,
-       
     }
 
     [Serializable]
     public class Component
     {
-        [XmlElement("id")]
+        [XmlElement("id")]              // 预留字段-空闲
         public string id { get; set; }
 
         [XmlElement("note")]
@@ -94,6 +93,9 @@ namespace DAQ
         [XmlElement("pressType")]
         public PressType pressType { get; set; }  // 按钮按下后的状态
 
+        [XmlElement("ponit")]
+        public int point { get; set; }  // 按钮按下后的状态
+
         public Component()
         {
             note = "";
@@ -107,6 +109,7 @@ namespace DAQ
             out_word_offset = "0";
             out_bit_offset = "0";
             pressType = PressType.Auto_Up;
+            point = 0;
         }
     }
 
