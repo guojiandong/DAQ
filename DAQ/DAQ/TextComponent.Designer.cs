@@ -66,11 +66,17 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "_uint_16,",
-            "_int_16,",
-            "_unit_32,",
-            "_int32",
-            "_int64"});
+            "_16_BCD = 0,",
+            "_32_BCD = 1,",
+            "_16_Hex = 2,",
+            "_32_Hex = 3,",
+            "_16_Binary = 4,",
+            "_32_Binary = 5,",
+            "_16_Unsigned = 6,",
+            "_16_Signed = 7,",
+            "_32_Unsigned = 8,",
+            "_32_Signed = 9,",
+            " _32_Float = 10"});
             this.comboBox1.Location = new System.Drawing.Point(419, 65);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);

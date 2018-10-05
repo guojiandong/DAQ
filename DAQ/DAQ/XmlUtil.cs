@@ -24,12 +24,14 @@ namespace DAQ
         /// <returns></returns>
         public static object Deserialize(Type type, string xml)
         {
+            object result = null;
             try
             {
                 using (StringReader sr = new StringReader(xml))
                 {
                     XmlSerializer xmldes = new XmlSerializer(type);
-                    return xmldes.Deserialize(sr);
+                    result = xmldes.Deserialize(sr);
+                    return result;
                 }
             }
             catch (Exception e)

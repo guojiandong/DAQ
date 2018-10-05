@@ -3,81 +3,111 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DAQ
 {
+    [Serializable]
     public enum DataType
     {
-        _16_uint = 0,
-        _16_int,
-        _32_uint,
-        _32_int,
-        _int64,
+        _16_BCD = 0,
+        _32_BCD = 1,
+        _16_Hex = 2,
+        _32_Hex = 3,
+        _16_Binary = 4,
+        _32_Binary = 5,
+        _16_Unsigned = 6,
+        _16_Signed = 7,
+        _32_Unsigned = 8,
+        _32_Signed = 9,
+        _32_Float = 10,
     }
 
+    [Serializable]
     public enum ChangeMode
     {
         Create = 0,
         Change = 1,
     }
 
+    [Serializable]
     public enum ComponentType
     {
         TextComponent = 1,
         BtnComponent = 2,
     }
 
+    [Serializable]
     public enum OperatorType
     {
-        Auto = 0,
-        Manual = 1,
+        _On = 0,
+        _Off = 1,
+        _Switch = 2,
+        _Reversion = 3,
     }
 
+    [Serializable]
     public enum PressType
     {
         Auto_Up = 0,
         Keep = 1,
+       
     }
 
+    [Serializable]
     public class Component
     {
-        public string Id ;   
-        public string note;   // 注釋 針對btn類型
-        public string offset; //偏移 ：針對Text類型
-        public string isEnable_Input; // 是否輸入
-        public int componentType;   // 控件類型
-        public OperatorType operatorType; // 操作類型
-        public DataType data_Type;   // 數據類型
+        [XmlElement("id")]
+        public string id { get; set; }
+
+        [XmlElement("note")]
+        public string note { get; set; } // 注釋 針對btn類型
+
+        [XmlElement("offset")]           
+        public string offset { get; set; }  //偏移 ：針對Text類型
+
+        [XmlElement("isEnable_Input")]
+        public string isEnable_Input { get; set; }  // 是否輸入
+
+        [XmlElement("componentType")]
+        public int componentType { get; set; }   // 控件類型
+
+        [XmlElement("operatorType")]
+        public OperatorType operatorType { get; set; } //操作类型
+
+        [XmlElement("data_Type")] 
+        public DataType data_Type { get; set; }   //数据类型
 
         //btn 類型專用
-        public string in_word_offset;  // 讀出 字偏移
-        public string in_bit_offset;  // 寫入 位偏移
+        [XmlElement("in_word_offset")]
+        public string in_word_offset { get; set; }  // 讀出 字偏移
 
-        public string out_word_offset;// 讀出字偏移
-        public string out_bit_offset; // 讀出位偏移
+        [XmlElement("in_bit_offset")]
+        public string in_bit_offset { get; set; }  // 寫入 位偏移
 
-        public PressType pressType = PressType.Auto_Up; // 按钮按下后的状态
+        [XmlElement("out_word_offset")]
+        public string out_word_offset { get; set; } // 讀出字偏移
 
+        [XmlElement("out_bit_offset")]
+        public string out_bit_offset { get; set; } // 讀出位偏移
 
-        /*
-        public Component(string _id, string _offset, string _note, bool _isEnable_Input, ComponentType _componentType, OperatorType _operatorType, DataType _data_Type)
+        [XmlElement("pressType")]
+        public PressType pressType { get; set; }  // 按钮按下后的状态
+
+        public Component()
         {
-            offset = _offset;
-            note = _note;
-            isEnable_Input = _isEnable_Input;
-            componentType = _componentType;
-            operatorType = _operatorType;
-            data_Type = _data_Type;
+            note = "";
+            offset = "0";
+            isEnable_Input = "false";
+            componentType = 1;
+            operatorType = OperatorType._On;
+            data_Type = DataType._16_BCD;
+            in_word_offset = "0";
+            in_bit_offset = "0";
+            out_word_offset = "0";
+            out_bit_offset = "0";
+            pressType = PressType.Auto_Up;
         }
-        
-        public string Id {get{return Id;}set{Id = value;}}
-        public string note { get { return note; } set { note = value; } }
-        public string offset { get { return offset; } set { offset = value; } }
-        public string isEnable_Input { get { return isEnable_Input; } set { isEnable_Input = value; } }
-        public ComponentType componentType { get { return componentType; } set { componentType = value; } }
-        public OperatorType operatorType { get { return operatorType; } set { operatorType = value; } }
-        public DataType data_Type { get { return data_Type; } set { data_Type = value; } }  
-          */
     }
 
 

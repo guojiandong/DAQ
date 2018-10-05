@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,11 +130,12 @@ namespace DAQ
                 com.isEnable_Input = comValue[1];
                 com.offset = comValue[4];
                 set_word_value(ref memory_block, int.Parse(comValue[4]), false);
-                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                int cur_data_type = CheckDataType(com.data_Type);
+                if (cur_data_type == 1 || cur_data_type == 2)
                 {
                     set_word_value(ref memory_block, int.Parse(comValue[4]) + 1, false);
                 }
-                else if (com.data_Type == DataType._int64)
+                else if (cur_data_type == 3)
                 {
                     set_word_value(ref memory_block, int.Parse(comValue[4]) + 1, false);
                     set_word_value(ref memory_block, int.Parse(comValue[4]) + 2, false);
@@ -172,12 +174,12 @@ namespace DAQ
             {
                 int offset = int.Parse(comValue[4]);
                 set_word_value(ref memory_block, offset, false);
-
-                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                int cur_data_type = CheckDataType(com.data_Type);
+                if (cur_data_type == 1 || cur_data_type == 2)
                 {
                     set_word_value(ref memory_block, offset + 1, false);
                 }
-                else if (com.data_Type == DataType._int64)
+                else if (cur_data_type == 3)
                 {
                     set_word_value(ref memory_block, offset + 1, false);
                     set_word_value(ref memory_block, offset + 2, false);
@@ -268,7 +270,10 @@ namespace DAQ
 
                 bool memoryUsed_right = check_word_used(ref memory_block, offset);
                 bool memoryUsed_left = check_word_used(ref memory_block, offset + 1);
-                if (com.data_Type == DataType._16_int || com.data_Type == DataType._16_uint){
+
+                int cur_data_type = CheckDataType(com.data_Type);
+                if (cur_data_type == 0)
+                {
                     if (!memoryUsed_right || isOverrid)
                     {
                         isSucc = memoryMapped(true, offset);
@@ -279,7 +284,7 @@ namespace DAQ
                         return false;
                     }
                 }
-                else if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint )
+                else if (cur_data_type == 1 || cur_data_type == 2)
                 {
                     bool succ1 = false;
                     bool succ2 = false;
@@ -295,7 +300,7 @@ namespace DAQ
                         return false;
                     }
                 }
-                else if (com.data_Type == DataType._int64)
+                else if (cur_data_type == 3)
                 {
                     bool memoryUsed_1 = check_word_used(ref memory_block, offset + 2);
                     bool memoryUsed_2 = check_word_used(ref memory_block, offset + 3);
@@ -382,7 +387,7 @@ namespace DAQ
                     com.componentType = int.Parse(comValue[0]);
                     com.isEnable_Input = comValue[1];
                     com.data_Type = (DataType)Enum.Parse(typeof(DataType), comValue[2]);
-                    com.operatorType = OperatorType.Auto;
+                    com.operatorType = OperatorType._On;
                     com.offset = comValue[4];
                     com.in_word_offset = comValue[5];
                     com.in_bit_offset = comValue[6];
@@ -422,9 +427,86 @@ namespace DAQ
 
         }
 
+        private void exportXml_Click(object sender, EventArgs e)
+        {
+            // 生成List对象用于测试
+            List<Component> list1 = new List<Component>();
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                ListViewItem item = listView1.Items[i];
+                Component com = new Component();
+
+                com.componentType = int.Parse ( item.SubItems[0].Text );
+                com.isEnable_Input = item.SubItems[1].Text;
+                com.data_Type = (DataType)Enum.Parse(typeof(DataType), item.SubItems[2].Text);
+                com.operatorType = (OperatorType)Enum.Parse(typeof(OperatorType), item.SubItems[3].Text);
+                com.offset = item.SubItems[4].Text;
+                com.in_word_offset = (item.SubItems[5].Text);
+                com.in_bit_offset =  (item.SubItems[6].Text);
+                com.out_word_offset =  (item.SubItems[7].Text);
+                com.out_bit_offset =  (item.SubItems[8].Text);
+                com.note =  (item.SubItems[9].Text);
+                com.pressType =  (PressType)Enum.Parse(typeof(PressType), item.SubItems[10].Text);
+                list1.Add(com);
+            }
+
+            // 序列化
+            string xml = XmlUtil.Serializer(typeof(List<Component>), list1);
+            Console.Write(xml);
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = @"C:\Users\SpringRain\Desktop";
+            sfd.Title = "请选择要保存的文件路径";
+            sfd.Filter = "文本文件|*.xml|所有文件|*.*";
+            sfd.ShowDialog();
+
+            //获得用户要保存的文件的路径
+            string path = sfd.FileName;
+            if (path == "")
+            {
+                return;
+            }
+            using (FileStream fsWrite = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                byte[] buffer = Encoding.Default.GetBytes(xml);
+                fsWrite.Write(buffer, 0, buffer.Length);
+            }
+            MessageBox.Show("保存成功");
+        }
+
+        private void importXml_Click(object sender, EventArgs e)
+        {
+            string fileName = string.Empty; //文件名
+            //打开文件
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.DefaultExt = "xml";
+            dlg.Filter = "xml Files|*.xml";
+            if (dlg.ShowDialog() == DialogResult.OK)
+                fileName = dlg.FileName;
+            if (fileName == null)
+                return;
+            //读取文件内容
+            StreamReader sr = new StreamReader(fileName, System.Text.Encoding.Default);
+            String xml = sr.ReadToEnd().TrimStart();
+            sr.Close();
+
+            List<Component> list2 = XmlUtil.Deserialize(typeof(List<Component>), xml) as List<Component>;
+            foreach (Component com in list2)
+            {
+
+                // 保存新的值到对应内存上
+                //bool canInsert = canInsert2ListView(com, true);
+                //if (!canInsert)
+                //{
+                //    return;
+                //}
+                AddComponent(com);
+                UpdateMemoryState(com);
+            }
+        }
 
         //把ListView数据写入XML
-        private void exportXml_Click(object sender, EventArgs e)
+        private void exportXml_Click1(object sender, EventArgs e)
         {
             DataTable dataTable = new DataTable("Test");
             for (int i = 0; i < listView1.Columns.Count; i++)
@@ -471,7 +553,7 @@ namespace DAQ
 
 
         //把XML数据读入ListView
-        private void importXml_Click(object sender, EventArgs e)
+        private void importXml_Click1(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet();
             //*
@@ -536,7 +618,7 @@ namespace DAQ
                     com.pressType = (PressType)Enum.Parse(typeof(PressType), curList[10]);
                 }
                 else
-                    com.operatorType = OperatorType.Auto;
+                    com.operatorType = OperatorType._On;
                 com.offset = curList[4].ToString();
                 com.in_word_offset = curList[5].ToString();
                 com.in_bit_offset = curList[6].ToString();
@@ -562,6 +644,8 @@ namespace DAQ
                 UpdateMemoryState(com);
             }
         }
+
+
 
         private void ClearListView_Click(object sender, EventArgs e)
         {
@@ -673,6 +757,29 @@ namespace DAQ
             return false;
         }
 
+        public static int CheckDataType(DataType data_type)
+        {
+            if (data_type == DataType._16_BCD || data_type == DataType._16_Binary || data_type == DataType._16_Hex ||
+                data_type == DataType._16_Signed || data_type == DataType._16_Unsigned)
+            {
+                return 0;
+            }
+            else if (data_type == DataType._32_BCD || data_type == DataType._32_Binary || data_type == DataType._32_Signed ||
+                data_type == DataType._32_Hex || data_type == DataType._32_Unsigned)
+            {
+                return 1;
+            }
+            else if (data_type == DataType._32_Float)
+            {
+                return 2;
+            }
+            else if (false) // 64-bit TODO
+            {
+                return 3;
+            }
+            return -1;
+        }
+
 
         //------------------------------------------------------------- 占用内存查看 DataGridView --------------------------------------//
         /*****
@@ -712,8 +819,8 @@ namespace DAQ
 
                 this.list_MemoryState[offset].State = numberOf1 > 0;
                 this.list_MemoryState[offset].Used_count = numberOf1;
-
-                if (com.data_Type == DataType._32_int || com.data_Type == DataType._32_uint)
+                int cur_data_type = CheckDataType(com.data_Type);
+                if (cur_data_type == 1 || cur_data_type == 2)
                 {
                     int curWordValue_1 = memory_block[offset];
                     int curOffset = offset + 1;
@@ -724,7 +831,7 @@ namespace DAQ
                     this.list_MemoryState[curOffset].State = numberOf1_1 > 0;
                     this.list_MemoryState[curOffset].Used_count = numberOf1_1;
                 }
-                else if (com.data_Type == DataType._int64)
+                else if (cur_data_type == 3)
                 {
                     int curOffset_1 = offset + 1;
                     int curWordValue_1 = memory_block[curOffset_1];

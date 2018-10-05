@@ -106,7 +106,7 @@ namespace DAQ
                 this.comboBox1.SelectedIndex = 0;
             com.data_Type = (DataType)this.comboBox1.SelectedIndex;
             com.componentType = (int)ComponentType.TextComponent;
-            com.operatorType = OperatorType.Auto; 
+            com.operatorType = OperatorType._On; 
             string offset = this.offset.Text;
             bool checkState = this.checkBox1.Checked;
             com.isEnable_Input = checkState.ToString();

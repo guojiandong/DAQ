@@ -85,8 +85,10 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Auto",
-            "Manual"});
+            "_On = 0,",
+            "_Off = 1,",
+            "_Switch = 2,",
+            "_Reversion = 3,"});
             this.comboBox1.Location = new System.Drawing.Point(312, 63);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);
