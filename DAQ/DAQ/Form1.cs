@@ -48,18 +48,22 @@ namespace DAQ
             int componentType = int.Parse(comValue[0]);
             if (componentType == (int)ComponentType.BtnComponent)
             {
-                indexOfDataGridView = int.Parse(comValue[4]);
+                indexOfDataGridView = int.Parse(comValue[5]);
 
             }
             else if (componentType == (int)ComponentType.TextComponent)
             {
-                indexOfDataGridView = int.Parse(comValue[5]);
+                indexOfDataGridView = int.Parse(comValue[4]);
             }
 
             if (indexOfDataGridView != -1)
             {
                 if (dataGridView1.Rows.Count > (indexOfDataGridView))
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.FirstDisplayedScrollingRowIndex = indexOfDataGridView - 3;
                     dataGridView1.Rows[indexOfDataGridView].Selected = true;
+                }
             }
         }
 
