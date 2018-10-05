@@ -151,7 +151,7 @@ namespace DAQ
         {
             this.offset.Text = com.offset;
             this.checkBox1.Checked = (bool)Convert.ToBoolean(com.isEnable_Input);
-            this.comboBox1.SelectedIndex = (int)com.operatorType;
+            this.comboBox1.SelectedIndex = (int)com.data_Type;
         }
 
         private void offset_KeyPress(object sender, KeyPressEventArgs e)

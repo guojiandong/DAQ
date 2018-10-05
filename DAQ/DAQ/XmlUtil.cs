@@ -64,6 +64,7 @@ namespace DAQ
         {
             MemoryStream Stream = new MemoryStream();
             XmlSerializer xml = new XmlSerializer(type);
+           
             try
             {
                 //序列化对象

@@ -207,6 +207,21 @@ namespace DAQ
             item.SubItems[8].Text = CheckEmpty(com.out_bit_offset);
             item.SubItems[9].Text = CheckEmpty(com.note);
             item.SubItems[10].Text = CheckEmpty(com.pressType.ToString());
+
+            //移除旧的内存关系
+            Component com_del = new Component();
+            com_del.componentType   = int.Parse(comValue[0]);
+            com_del.isEnable_Input  = comValue[1];
+            com_del.data_Type       = (DataType)Enum.Parse(typeof(DataType), comValue[2]);
+            com_del.offset          = comValue[4];
+            com_del.in_word_offset  = comValue[5];
+            com_del.in_bit_offset   = comValue[6];
+            com_del.out_word_offset = comValue[7];
+            com_del.out_bit_offset  = comValue[8];
+
+            UpdateMemoryState(com_del);
+
+            //添加新的内存映射
             UpdateMemoryState(com);
         }
 
@@ -491,6 +506,11 @@ namespace DAQ
             sr.Close();
 
             List<Component> list2 = XmlUtil.Deserialize(typeof(List<Component>), xml) as List<Component>;
+            if (list2 == null)
+            {
+                MessageBox.Show("反序列化错误！");
+                return;
+            }
             foreach (Component com in list2)
             {
 
