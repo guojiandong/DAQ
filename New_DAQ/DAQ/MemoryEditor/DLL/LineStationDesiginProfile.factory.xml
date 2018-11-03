@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LineStationDesiginProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" VersionCode="1">
+  <LineSections>
+    <LineSection>
+      <Name>Cover</Name>
+      <Tag>Cover</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Cover</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+    <LineSection>
+      <Name>Base</Name>
+      <Tag>Base</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Base</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+    <LineSection>
+      <Name>Hoop</Name>
+      <Tag>Hoop</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Hoop</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines>
+        <LineMachine>
+          <Name>Hoop-M01</Name>
+          <Tag>Hoop-M01</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320313118017</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>载具检测</Name>
+              <Tag>Hoop-M01-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691327758674065</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult AllowResetResult AllowFixFixture</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具进站</Name>
+              <Tag>Hoop-M01-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692323287273624</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowFixFixture IgnoreEmptyFixture</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>上料</Name>
+              <Tag>Hoop-M01-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691332079756091</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult FixVisualProduct</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具出站</Name>
+              <Tag>Hoop-M01-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691327308770062</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Hoop-M01-PLC</Tag>
+              <Name>Hoop-M01-PLC</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692880081650458</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.10</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Hoop-M02</Name>
+          <Tag>Hoop-M02</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320456638018</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Hoop-M02-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691332953668097</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>上料</Name>
+              <Tag>Hoop-M02-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691333275808099</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>出站</Name>
+              <Tag>Hoop-M02-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691333400296100</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Hoop-M02-PLC</Tag>
+              <Name>Hoop-M02</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874334420624</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.20</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Hoop-M03</Name>
+          <Tag>Hoop-M03</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320596414019</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Hoop-M03-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691333605592101</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>相机检测1</Name>
+              <Tag>Hoop-M03-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054291962364</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>焊接检测</Name>
+              <Tag>Hoop-M03-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691334178112105</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>出站</Name>
+              <Tag>Hoop-M03-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691334494480107</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Hoop-M03-PLC</Tag>
+              <Name>Hoop-M03</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874424276782</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.30</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Hoop-M04</Name>
+          <Tag>Hoop-M04</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320721682020</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Hoop-M04-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691334620372107</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>焊点检测</Name>
+              <Tag>Hoop-M04-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691335092272111</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>检测产品高度</Name>
+              <Tag>Hoop-M04-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691335383992112</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>出站</Name>
+              <Tag>Hoop-M04-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691335585076114</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具回流检测</Name>
+              <Tag>Hoop-M04-S05</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692319473594555</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AutoUnBind</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Hoop-M04-PLC</Tag>
+              <Name>Hoop-M04</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874507112927</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.40</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Hoop-M05</Name>
+          <Tag>Hoop-M05</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320830726021</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Hoop-M05-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691336509376120</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>打印条码</Name>
+              <Tag>Hoop-M05-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691336751644121</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>条码检测</Name>
+              <Tag>Hoop-M05-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054398822551</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>产品解绑</Name>
+              <Tag>Hoop-M05-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692304938019858</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AutoUnBind</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Hoop-M05-PLC</Tag>
+              <Name>Hoop-M05</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636691332623572095</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.50</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+      </Machines>
+    </LineSection>
+    <LineSection>
+      <Name>Tub</Name>
+      <Tag>Tub</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Tub</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines>
+        <LineMachine>
+          <Name>Tub-M01</Name>
+          <Tag>Tub-M01</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320313118017</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>载具检测</Name>
+              <Tag>Tub-M01-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691327758674065</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult AllowResetResult AllowFixFixture</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>产品绑定</Name>
+              <Tag>Tub-M01-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692317446252904</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowFixFixture</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>来料检测</Name>
+              <Tag>Tub-M01-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692318342075175</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>物料绑定</Name>
+              <Tag>Tub-M01-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692318091198334</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具出站</Name>
+              <Tag>Tub-M01-S05</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692318001680323</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Tub-M01-PLC</Tag>
+              <Name>Tub-M01-PLC</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692873957991963</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.60</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Tub-M02</Name>
+          <Tag>Tub-M02</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320456638018</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Tub-M02-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636691332953668097</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>焊接检测</Name>
+              <Tag>Tub-M02-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054470894678</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>AOI检测</Name>
+              <Tag>Tub-M02-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054521438767</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>出站</Name>
+              <Tag>Tub-M02-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692319091989451</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具回流检测</Name>
+              <Tag>Tub-M02-S05</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692319387595541</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AutoUnBind</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Tub-M02-PLC</Tag>
+              <Name>Tub-M02</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874044728115</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.70</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Tub-M03</Name>
+          <Tag>Tub-M03</Tag>
+          <Remark />
+          <UpdateTimeTicks>636692322320232253</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>进站</Name>
+              <Tag>Tub-M03-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692322449435543</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>焊接检测</Name>
+              <Tag>Tub-M03-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054180422168</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>AOI检测</Name>
+              <Tag>Tub-M03-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054123482068</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具出站</Name>
+              <Tag>Tub-M03-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693053773105452</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>载具进站</Name>
+              <Tag>Tub-M03-S05</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693054052345943</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>解除绑定</Name>
+              <Tag>Tub-M03-S06</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693053605249157</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>None</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Tub-M03-PLC</Tag>
+              <Name>Tub-M03</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874133180270</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.80</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+        <LineMachine>
+          <Name>Tub-M04</Name>
+          <Tag>Tub-M04</Tag>
+          <Remark />
+          <UpdateTimeTicks>636691320721682020</UpdateTimeTicks>
+          <SerialNumber />
+          <Enable>true</Enable>
+          <Stations>
+            <LineStation>
+              <Name>载具绑定</Name>
+              <Tag>Tub-M04-S01</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692324025035979</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowFixFixture</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>AOI检测1</Name>
+              <Tag>Tub-M04-S02</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692324141836170</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>AOI检测2</Name>
+              <Tag>Tub-M04-S03</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692324210308261</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AllowSetResult</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>不良品解绑</Name>
+              <Tag>Tub-M04-S04</Tag>
+              <Remark />
+              <UpdateTimeTicks>636693065186552786</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>FailedAutoUnBind</Properties>
+              <Devices />
+            </LineStation>
+            <LineStation>
+              <Name>良品解绑</Name>
+              <Tag>Tub-M04-S05</Tag>
+              <Remark />
+              <UpdateTimeTicks>636692324497191421</UpdateTimeTicks>
+              <MaxInputCacheFixtureCount>1</MaxInputCacheFixtureCount>
+              <MaxOutputCacheFixtureCount>1</MaxOutputCacheFixtureCount>
+              <PrevousStationOffset>0</PrevousStationOffset>
+              <Properties>AutoUnBind</Properties>
+              <Devices />
+            </LineStation>
+          </Stations>
+          <Devices>
+            <AbstractCommunicationProfile xsi:type="SocketClientProfile">
+              <Tag>Tub-M04-PLC</Tag>
+              <Name>Tub-M04</Name>
+              <Remark />
+              <DeviceType>PLC</DeviceType>
+              <Enable>true</Enable>
+              <Priority>Normal</Priority>
+              <UpdateTimeTicks>636692874214144413</UpdateTimeTicks>
+              <Port>9600</Port>
+              <WriteBufferSize>8192</WriteBufferSize>
+              <WriteTimeout>-1</WriteTimeout>
+              <ReadTimeout>-1</ReadTimeout>
+              <ReadBufferSize>8192</ReadBufferSize>
+              <SockType>Tcp</SockType>
+              <Protocol>Fins</Protocol>
+              <IpAddress>192.168.10.90</IpAddress>
+            </AbstractCommunicationProfile>
+          </Devices>
+        </LineMachine>
+      </Machines>
+    </LineSection>
+    <LineSection>
+      <Name>InnerAssy</Name>
+      <Tag>InnerAssy</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>InnerAssy</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+    <LineSection>
+      <Name>Docking</Name>
+      <Tag>Docking</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Docking</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+    <LineSection>
+      <Name>Motor</Name>
+      <Tag>Motor</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Motor</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+    <LineSection>
+      <Name>Tab</Name>
+      <Tag>Tab</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Tab</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+  </LineSections>
+</LineStationDesiginProfile>

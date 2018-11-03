@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MemoryDesiginProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" VersionCode="1">
+  <EventSections>
+    <EventSection>
+      <EventName>Register</EventName>
+      <MemoryBegin>1</MemoryBegin>
+      <MemoryEnd>3</MemoryEnd>
+      <DataSize>3</DataSize>
+      <Description>true</Description>
+    </EventSection>
+      <Name>InnerAssy</Name>
+      <Tag>InnerAssy</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>InnerAssy</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+      <Name>Docking</Name>
+      <Tag>Docking</Tag>
+      <Remark />
+      <UpdateTimeTicks>0</UpdateTimeTicks>
+      <SectionID>Docking</SectionID>
+      <Enable>true</Enable>
+      <ReadOnly>true</ReadOnly>
+      <Machines />
+    </LineSection>
+  </EventSections>
+</MemoryDesiginProfile>
