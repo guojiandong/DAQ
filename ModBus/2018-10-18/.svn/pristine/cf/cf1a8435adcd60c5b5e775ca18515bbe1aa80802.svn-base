@@ -1,0 +1,163 @@
+﻿using Ksat.AppPlugIn.Communicate.FastIocp.Base;
+using Ksat.AppPlugIn.Communicate.FastIocp.Base.Messaging;
+using Ksat.AppPlugIn.Communicate.FastIocp.Base.Protocol;
+using Ksat.AppPlugIn.Communicate.FastIocp.Client;
+using Ksat.AppPlugIn.Threading.Task.Sock;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TestSocketConsole
+{
+    public class PlcFinsSocketClientTask : AbstractSocketTask<AbstractFinsTcpMessage>
+    {
+        private SocketClient<AbstractFinsTcpMessage> mSocket;
+
+        private ushort mSendSeqID;
+
+        public PlcFinsSocketClientTask() : base(null)
+        {
+            //this.LocalIpAddress = localipaddress;
+
+            mSendSeqID = (ushort)(new Random().Next(10, 200));
+            mSocket = new SocketClient<AbstractFinsTcpMessage>(new FinsTcpProtocol());
+            mSocket.RegisterListener(this);
+        }
+
+        protected override Ksat.AppPlugIn.Communicate.FastIocp.Base.AbstractSessionBase GetSession()
+        {
+            return mSocket;
+        }
+        
+        protected override void onTaskStarted(object param)
+        {
+            
+            //连接服务器
+
+            base.onTaskStarted(param);
+        }
+
+        protected override void onStatusRegisteredListener(Ksat.AppPlugIn.Communicate.FastIocp.Base.ISocketStatusChangedListener listener)
+        {
+            base.onStatusRegisteredListener(listener);
+
+            if (this.GetSession() == null) return;
+
+            foreach (Ksat.AppPlugIn.Communicate.FastIocp.Base.IConnection conn in this.GetSession().ListAllConnection())
+            {
+                listener.OnConnected(conn);
+            }
+        }
+
+        public bool TryConnect(string tag, string remoteip, int port, SocketClientTask.OnConnectedCallback callback = null)
+        {
+            if (String.IsNullOrEmpty(remoteip))
+                remoteip = "127.0.0.1";
+
+            //if (callback != null)
+            //{
+            //    return mSocket.TryRegisterEndPoint(tag, new[] { new System.Net.IPEndPoint(System.Net.IPAddress.Parse(remoteip), port) },
+            //        connection =>
+            //        {
+            //            var source = new TaskCompletionSource<bool>();
+            //            if (callback != null)
+            //                callback(connection);
+            //            return source.Task;
+            //        });
+            //}
+
+            return mSocket.TryRegisterEndPoint(tag, new[] { new System.Net.IPEndPoint(System.Net.IPAddress.Parse(remoteip), port) });
+        }
+
+        public void Disconnect(string tag)
+        {
+            if (String.IsNullOrEmpty(tag))
+            {
+                throw new ArgumentNullException("invalid parameters.");
+            }
+
+            mSocket.UnRegisterEndPoint(tag);
+        }
+
+
+        public IConnection GetConnectionByTag(string tag)
+        {
+            return mSocket.GetConnectionByTag(tag);
+        }
+
+        /// <summary>
+        /// 强制和服务器断开
+        /// </summary>
+        /// <param name="connection"></param>
+        public void Disconnect(Ksat.AppPlugIn.Communicate.FastIocp.Base.IConnection connection)
+        {
+            mSocket.UnRegisterEndPoint(connection.Tag);
+
+            connection.BeginDisconnect();
+        }
+
+        /// <summary>
+        /// 接收到新的数据
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="message"></param>
+        public override void OnReceived(IConnection connection, AbstractFinsTcpMessage message)
+        {
+            base.OnReceived(connection, message);
+
+            // 发送消息
+            //connection.BeginSend(message.ToPacket());
+        }
+
+        /// <summary>
+        /// 和服务器连接成功
+        /// </summary>
+        /// <param name="connection"></param>
+        public override void OnConnected(IConnection connection)
+        {
+            base.OnConnected(connection);
+
+            // 发送消息
+            //connection.BeginSend(message.ToPacket());
+        }
+
+
+        /// <summary>
+        /// 和服务器连接断开
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="ex"></param>
+        public override void OnDisconnected(IConnection connection, Exception ex)
+        {
+            base.OnDisconnected(connection, ex);
+        }
+
+        /// <summary>
+        /// 给服务器发送消息结果
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="packet"></param>
+        /// <param name="isSuccess"></param>
+        public override void OnSendCallback(IConnection connection, Packet packet, bool isSuccess)
+        {
+            base.OnSendCallback(connection, packet, isSuccess);
+
+            // 失败重新发送
+            if (!isSuccess)
+            {
+                connection.BeginSend(packet);
+            }
+        }
+
+        /// <summary>
+        /// 连接发生异常
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="ex"></param>
+        public override void OnException(IConnection connection, Exception ex)
+        {
+            base.OnException(connection, ex);
+        }
+    }
+}

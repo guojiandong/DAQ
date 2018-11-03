@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+    </startup>
+  <appSettings>
+    <add name="mysqlconnectionString" connectionString="Database=db_log;Data Source=172.17.201.222;User Id=dbdevlogger;Password=dblogger0000;CharSet=utf8;port=3306"/>
+  </appSettings>
+</configuration>

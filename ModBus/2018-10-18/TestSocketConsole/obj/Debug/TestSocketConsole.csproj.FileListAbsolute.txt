@@ -1,0 +1,8 @@
+E:\1018\TestSocketConsole\obj\Debug\TestSocketConsole.csprojResolveAssemblyReference.cache
+E:\1018\TestSocketConsole\bin\Debug\TestSocketConsole.exe.config
+E:\1018\TestSocketConsole\bin\Debug\TestSocketConsole.exe
+E:\1018\TestSocketConsole\bin\Debug\TestSocketConsole.pdb
+E:\1018\TestSocketConsole\bin\Debug\Ksat.AppPlugIn.dll
+E:\1018\TestSocketConsole\bin\Debug\Ksat.AppPlugIn.pdb
+E:\1018\TestSocketConsole\obj\Debug\TestSocketConsole.exe
+E:\1018\TestSocketConsole\obj\Debug\TestSocketConsole.pdb

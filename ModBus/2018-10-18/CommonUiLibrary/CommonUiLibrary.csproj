@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8A37B4E-FEA4-455B-AA0F-89A38593FBED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ksat.AppPlugInUiLibrary</RootNamespace>
+    <AssemblyName>AppPlugInUiLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\libs\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\libs\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Login\AccountType.cs" />
+    <Compile Include="Login\ILoginResultListener.cs" />
+    <Compile Include="Login\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginFormManager.cs" />
+    <Compile Include="Login\SimpleLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\SimpleLoginForm.Designer.cs">
+      <DependentUpon>SimpleLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\StorePassword.cs" />
+    <Compile Include="MessageTip\Border.cs" />
+    <Compile Include="MessageTip\GraphicsUtils.cs" />
+    <Compile Include="MessageTip\LayeredWindow.cs" />
+    <Compile Include="MessageTip\MessageTip.cs" />
+    <Compile Include="MessageTip\TipStyle.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UiCtrl\AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\FrmLoadingCircle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\FrmLoadingCircle.Designer.cs">
+      <DependentUpon>FrmLoadingCircle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingCircle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingCircle.Designer.cs">
+      <DependentUpon>LoadingCircle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingCircleControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingCircleControl.Designer.cs">
+      <DependentUpon>LoadingCircleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\NumInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\NumInputControl.Designer.cs">
+      <DependentUpon>NumInputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\ShowMessageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\ShowMessageDialog.Designer.cs">
+      <DependentUpon>ShowMessageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiCtrl\SwitchButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\SwitchButton.Designer.cs">
+      <DependentUpon>SwitchButton.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.zh-CN.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\SimpleLoginForm.resx">
+      <DependentUpon>SimpleLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\SimpleLoginForm.zh-CN.resx">
+      <DependentUpon>SimpleLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="UiCtrl\AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiCtrl\FrmLoadingCircle.resx">
+      <DependentUpon>FrmLoadingCircle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiCtrl\LoadingCircle.resx">
+      <DependentUpon>LoadingCircle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiCtrl\LoadingForm.resx">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiCtrl\NumInputControl.resx">
+      <DependentUpon>NumInputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UiCtrl\NumInputControl.zh-CN.resx">
+      <DependentUpon>NumInputControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Animation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppPlugIn\AppPlugIn.csproj">
+      <Project>{c7f74f24-86f0-4a65-a9d5-011117850395}</Project>
+      <Name>AppPlugIn</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

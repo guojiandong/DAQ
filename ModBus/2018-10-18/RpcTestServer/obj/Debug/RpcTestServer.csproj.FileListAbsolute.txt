@@ -1,0 +1,1 @@
+E:\1018\RpcTestServer\obj\Debug\RpcTestServer.csprojResolveAssemblyReference.cache

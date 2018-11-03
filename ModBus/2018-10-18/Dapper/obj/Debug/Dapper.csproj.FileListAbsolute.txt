@@ -1,0 +1,2 @@
+E:\ModBus\Dapper\obj\Debug\Dapper.csprojResolveAssemblyReference.cache
+E:\1018\Dapper\obj\Debug\Dapper.csprojResolveAssemblyReference.cache

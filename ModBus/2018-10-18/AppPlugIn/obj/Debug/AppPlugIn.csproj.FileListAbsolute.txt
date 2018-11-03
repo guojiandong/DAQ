@@ -1,0 +1,5 @@
+E:\1018\libs\Debug\Ksat.AppPlugIn.dll
+E:\1018\libs\Debug\Ksat.AppPlugIn.pdb
+E:\1018\AppPlugIn\obj\Debug\Ksat.AppPlugIn.dll
+E:\1018\AppPlugIn\obj\Debug\Ksat.AppPlugIn.pdb
+E:\1018\AppPlugIn\obj\Debug\AppPlugIn.csprojResolveAssemblyReference.cache

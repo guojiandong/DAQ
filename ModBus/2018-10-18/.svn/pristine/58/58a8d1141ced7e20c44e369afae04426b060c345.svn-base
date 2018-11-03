@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95E2D2BE-4CF1-4203-8E5F-6E68E5D03908}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dapper</RootNamespace>
+    <AssemblyName>Dapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\libs\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\libs\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contrib\SqlMapperExtensions.Async.cs" />
+    <Compile Include="Contrib\SqlMapperExtensions.cs" />
+    <Compile Include="Tests\Demo.cs" />
+    <Compile Include="CommandDefinition.cs" />
+    <Compile Include="CommandFlags.cs" />
+    <Compile Include="CustomPropertyTypeMap.cs" />
+    <Compile Include="DataTableHandler.cs" />
+    <Compile Include="DbString.cs" />
+    <Compile Include="DefaultTypeMap.cs" />
+    <Compile Include="DynamicParameters.CachedOutputSetters.cs" />
+    <Compile Include="DynamicParameters.cs" />
+    <Compile Include="DynamicParameters.ParamInfo.cs" />
+    <Compile Include="ExplicitConstructorAttribute.cs" />
+    <Compile Include="FeatureSupport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rainbow\Database.Async.cs" />
+    <Compile Include="Rainbow\Database.cs" />
+    <Compile Include="Rainbow\IgnorePropertyAttribute.cs" />
+    <Compile Include="Rainbow\Snapshotter.cs" />
+    <Compile Include="Rainbow\SqlCompactDatabase.cs" />
+    <Compile Include="SimpleMemberMap.cs" />
+    <Compile Include="SqlBuilder\SqlBuilder.cs" />
+    <Compile Include="SqlDataRecordHandler.cs" />
+    <Compile Include="SqlDataRecordListTVPParameter.cs" />
+    <Compile Include="SqlMapper.Async.cs" />
+    <Compile Include="SqlMapper.CacheInfo.cs" />
+    <Compile Include="SqlMapper.cs" />
+    <Compile Include="SqlMapper.DapperRow.cs" />
+    <Compile Include="SqlMapper.DapperRowMetaObject.cs" />
+    <Compile Include="SqlMapper.DapperTable.cs" />
+    <Compile Include="SqlMapper.DeserializerState.cs" />
+    <Compile Include="SqlMapper.DontMap.cs" />
+    <Compile Include="SqlMapper.GridReader.Async.cs" />
+    <Compile Include="SqlMapper.GridReader.cs" />
+    <Compile Include="SqlMapper.ICustomQueryParameter.cs" />
+    <Compile Include="SqlMapper.IDataReader.cs" />
+    <Compile Include="SqlMapper.Identity.cs" />
+    <Compile Include="SqlMapper.IDynamicParameters.cs" />
+    <Compile Include="SqlMapper.IMemberMap.cs" />
+    <Compile Include="SqlMapper.IParameterCallbacks.cs" />
+    <Compile Include="SqlMapper.IParameterLookup.cs" />
+    <Compile Include="SqlMapper.ITypeHandler.cs" />
+    <Compile Include="SqlMapper.ITypeMap.cs" />
+    <Compile Include="SqlMapper.Link.cs" />
+    <Compile Include="SqlMapper.LiteralToken.cs" />
+    <Compile Include="SqlMapper.Settings.cs" />
+    <Compile Include="SqlMapper.TypeDeserializerCache.cs" />
+    <Compile Include="SqlMapper.TypeHandler.cs" />
+    <Compile Include="SqlMapper.TypeHandlerCache.cs" />
+    <Compile Include="TableValuedParameter.cs" />
+    <Compile Include="Tests\Helpers\Attributes.cs" />
+    <Compile Include="Tests\Helpers\FactAttribute.cs" />
+    <Compile Include="Tests\Helpers\SqlServerTypesLoader.cs" />
+    <Compile Include="Tests\SqliteTests.cs" />
+    <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="UdtTypeHandler.cs" />
+    <Compile Include="WrappedDataReader.cs" />
+    <Compile Include="WrappedReader.cs" />
+    <Compile Include="XmlHandlers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Contrib\Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attr\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,5 @@
+E:\1018\KsatRpcLibrary\bin\Debug\KsatRpcLibrary.dll
+E:\1018\KsatRpcLibrary\bin\Debug\KsatRpcLibrary.pdb
+E:\1018\KsatRpcLibrary\obj\Debug\KsatRpcLibrary.csprojResolveAssemblyReference.cache
+E:\1018\KsatRpcLibrary\obj\Debug\KsatRpcLibrary.dll
+E:\1018\KsatRpcLibrary\obj\Debug\KsatRpcLibrary.pdb

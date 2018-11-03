@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7F74F24-86F0-4A65-A9D5-011117850395}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ksat.AppPlugIn</RootNamespace>
+    <AssemblyName>Ksat.AppPlugIn</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\libs\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\libs\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assembly\AssemblyUtil.cs" />
+    <Compile Include="Assembly\IObjectBuilder.cs" />
+    <Compile Include="Assembly\TypeCreator.cs" />
+    <Compile Include="Common\Attr\ColumnAttribute.cs" />
+    <Compile Include="Common\Attr\ColumnIgnoreAttribute.cs" />
+    <Compile Include="Common\Attr\EnumDescriptionAttribute.cs" />
+    <Compile Include="Common\Attr\TableNameAttribute.cs" />
+    <Compile Include="Common\OperatingSystemType.cs" />
+    <Compile Include="Communicate\Base\IDataReceivedListener.cs" />
+    <Compile Include="Communicate\Base\IStatusChangedListener.cs" />
+    <Compile Include="Communicate\FastIocp\Base\AbstractSocketStatusChangedListener.cs" />
+    <Compile Include="Communicate\FastIocp\Base\ISocketDataChangedListener.cs" />
+    <Compile Include="Communicate\FastIocp\Base\ISocketMessageReceivedListener.cs" />
+    <Compile Include="Communicate\FastIocp\Base\ISocketStatusChangedListener.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\AbstractMessageBase.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\BinaryMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\CommandLineMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\AbstractFinsTcpMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\Fins\FinsTcpDataFrameMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\Fins\FinsTcpHandShakeMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\StringMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\ThriftMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Messaging\IMessage.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\AbstractProtocolBase.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\BadProtocolException.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\BinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\CommandLineProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedEndBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedHeadAndEndBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedHeadAndLengthBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedHeadBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedLengthBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\Filter\FixedMinLengthBinaryProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\FinsTcpProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\IProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\IUdpProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\StringProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\ThriftProtocol.cs" />
+    <Compile Include="Communicate\FastIocp\Client\Request.cs" />
+    <Compile Include="Communicate\FastIocp\Client\RequestException.cs" />
+    <Compile Include="Communicate\FastIocp\Client\SocketClient.cs" />
+    <Compile Include="Communicate\FastIocp\Client\SocketConnector.cs" />
+    <Compile Include="Communicate\FastIocp\Client\ThriftClient.cs" />
+    <Compile Include="Communicate\FastIocp\Server\AbsSocketService.cs" />
+    <Compile Include="Communicate\FastIocp\Server\AbsUdpService.cs" />
+    <Compile Include="Communicate\FastIocp\Server\ISocketListener.cs" />
+    <Compile Include="Communicate\FastIocp\Server\IUdpServer.cs" />
+    <Compile Include="Communicate\FastIocp\Server\IUdpService.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Protocol\ProtocolNames.cs" />
+    <Compile Include="Communicate\FastIocp\Server\SocketListener.cs" />
+    <Compile Include="Communicate\FastIocp\Server\SocketServer.cs" />
+    <Compile Include="Communicate\FastIocp\Server\SocketServerManager.cs" />
+    <Compile Include="Communicate\FastIocp\Server\UdpServer.cs" />
+    <Compile Include="Communicate\FastIocp\Server\UdpSession.cs" />
+    <Compile Include="Communicate\IocpCore\Common\BufferManager.cs" />
+    <Compile Include="Communicate\IocpCore\Common\ConnectClient.cs" />
+    <Compile Include="Communicate\IocpCore\Common\NetWork.cs" />
+    <Compile Include="Communicate\IocpCore\Common\SendingQueueItem.cs" />
+    <Compile Include="Communicate\IocpCore\Common\SocketAsyncEventArgsPool.cs" />
+    <Compile Include="Communicate\IocpCore\TcpClients.cs" />
+    <Compile Include="Communicate\IocpCore\TcpPushClient.cs" />
+    <Compile Include="Communicate\IocpCore\TcpPushServer.cs" />
+    <Compile Include="Communicate\IocpCore\TcpServer.cs" />
+    <Compile Include="Communicate\IocpCore\UdpClients.cs" />
+    <Compile Include="Communicate\IocpCore\UdpServer.cs" />
+    <Compile Include="Communicate\SuperIoc\Base\AbstraceSessionBase.cs" />
+    <Compile Include="Communicate\SuperIoc\Base\SessionStatusObjectEventArgs.cs" />
+    <Compile Include="Communicate\SuperIoc\Base\ISessionStatusListener.cs" />
+    <Compile Include="Communicate\SuperIoc\ChannelState.cs" />
+    <Compile Include="Communicate\SuperIoc\CommunicateState.cs" />
+    <Compile Include="Communicate\SuperIoc\CommunicateType.cs" />
+    <Compile Include="Communicate\SuperIoc\Base\ISession.cs" />
+    <Compile Include="Communicate\SuperIoc\Com\ComSession.cs" />
+    <Compile Include="Communicate\SuperIoc\Com\ComUtils.cs" />
+    <Compile Include="Communicate\SuperIoc\Com\IComSession.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\IReceiveCache.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\ISendCache.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\ISendCommand.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\Priority.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\ReceiveCache.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\SendCache.cs" />
+    <Compile Include="Communicate\SuperIoc\DataCache\SendCommand.cs" />
+    <Compile Include="Communicate\FastIocp\Base\AbstractSessionBase.cs" />
+    <Compile Include="Communicate\FastIocp\Base\ConnectionCollection.cs" />
+    <Compile Include="Communicate\FastIocp\Base\DisconnectedHandler.cs" />
+    <Compile Include="Communicate\FastIocp\Base\IConnection.cs" />
+    <Compile Include="Communicate\FastIocp\Base\ISession.cs" />
+    <Compile Include="Communicate\FastIocp\Base\MessageReceivedEventArgs.cs" />
+    <Compile Include="Communicate\FastIocp\Base\Packet.cs" />
+    <Compile Include="Communicate\FastIocp\Base\SocketAsyncEventArgsPool.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\AbstractSocketListenerBase.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\ISocketListener.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\ISocketSession.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\SocketExtension.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\SocketMode.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\AbstractSocketSession.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\TcpSocketListener.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\TcpSocketSession.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\UdpSocketListener.cs" />
+    <Compile Include="Communicate\SuperIoc\Net\UdpSocketSession.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\Impl\FixedEndReceiveFliter.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\Impl\FixedHeadAndEndReceiveFliter.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\Impl\FixedHeadAndLengthReceiveFliter.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\Impl\FixedHeadReceiveFliter.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\Impl\FixedLengthReceiveFliter.cs" />
+    <Compile Include="Communicate\SuperIoc\Protocol\Filter\IReceiveFilter.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="IAppContext.cs" />
+    <Compile Include="Impl\AbstractAppContext.cs" />
+    <Compile Include="IPlugInComponent.cs" />
+    <Compile Include="Impl\AbstractPlugInComponentBase.cs" />
+    <Compile Include="IPlugInComponentConfig.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggerType.cs" />
+    <Compile Include="Logging\Log\ConsoleLogger.cs" />
+    <Compile Include="Logging\Log\DiagnosticLogger.cs" />
+    <Compile Include="Logging\Log\FileLogger.cs" />
+    <Compile Include="Logging\Log\ILogger.cs" />
+    <Compile Include="Logging\Log\LoggerImpl.cs" />
+    <Compile Include="Logging\Log\LogMessage.cs" />
+    <Compile Include="Logging\Log\LogMessageType.cs" />
+    <Compile Include="Model\AbstractDataStoreBase.cs" />
+    <Compile Include="Model\AccessTypeEnum.cs" />
+    <Compile Include="Model\Args\CommandEventArgs.cs" />
+    <Compile Include="Model\Args\LogMessageEventArgs.cs" />
+    <Compile Include="Model\Args\ObjectEventArgs.cs" />
+    <Compile Include="Model\Args\ParameterChangedEventArgs.cs" />
+    <Compile Include="Model\Args\SyncInformationEventArgs.cs" />
+    <Compile Include="Model\Args\WaitingEventArgs.cs" />
+    <Compile Include="Model\Cmd\AbstractCommandEventArgs.cs" />
+    <Compile Include="Model\Cmd\ResponseCommandWithFilterManager.cs" />
+    <Compile Include="Model\Cmd\CommandQueueManager.cs" />
+    <Compile Include="Model\Cmd\IResponseCommandEventListener.cs" />
+    <Compile Include="Model\Cmd\RequestCommandEventArgs.cs" />
+    <Compile Include="Model\Cmd\ResponseCommandEventArgs.cs" />
+    <Compile Include="Model\Cmd\ResponseStringCommandWithFilterManager.cs" />
+    <Compile Include="Model\Communication\AbstractCommunicationIpcProfile.cs" />
+    <Compile Include="Model\Communication\AbstractCommunicationProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationSocketProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationSocketClientProfile.cs" />
+    <Compile Include="Model\DataStore\DataStoreBase.cs" />
+    <Compile Include="Model\DataStore\LogMessageDataRecord.cs" />
+    <Compile Include="Model\Settings\AbstractProfileSettings.cs" />
+    <Compile Include="Model\Settings\AbstractProfileSettingsWithLoading.cs" />
+    <Compile Include="Model\Communication\CommunicationIpcClientProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationIpcServerProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationSerialPortProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationSocketTcpClientProfile.cs" />
+    <Compile Include="Model\Communication\CommunicationSocketTcpServerProfile.cs" />
+    <Compile Include="Model\Settings\IProfileSettingsChanged.cs" />
+    <Compile Include="Model\Settings\MainProfileSettings.cs" />
+    <Compile Include="Model\Settings\ProfileHelper.cs" />
+    <Compile Include="MultiLanguage\LanguageEnum.cs" />
+    <Compile Include="Model\MenuItemEnum.cs" />
+    <Compile Include="Model\PermissionInfo.cs" />
+    <Compile Include="Model\PermissionManager.cs" />
+    <Compile Include="Model\RoleTypeEnum.cs" />
+    <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="MultiLanguage\MultiLanguageManager.cs" />
+    <Compile Include="PluginEngine\AbstractFormPluginBase.cs" />
+    <Compile Include="PluginEngine\AbstractPluginBase.cs" />
+    <Compile Include="PluginEngine\AbstractPluginBaseInfo.cs" />
+    <Compile Include="PluginEngine\PluginDepandAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\Ipc\AbstractIpcObject.cs" />
+    <Compile Include="Threading\Ipc\AbstractRemoteApi.cs" />
+    <Compile Include="Threading\Ipc\DefaultGlobalApi.cs" />
+    <Compile Include="Threading\Ipc\IpcClient.cs" />
+    <Compile Include="Threading\Ipc\IpcServer.cs" />
+    <Compile Include="Threading\Ipc\IpcTcpClient.cs" />
+    <Compile Include="Threading\Ipc\IpcTcpServer.cs" />
+    <Compile Include="Threading\Listener\AbstractRegisterManager.cs" />
+    <Compile Include="Threading\Listener\CacheListenerItem.cs" />
+    <Compile Include="Threading\Listener\IListenerCallback.cs" />
+    <Compile Include="Threading\Listener\NotifyDelayMode.cs" />
+    <Compile Include="Threading\Listener\RegisterManager.cs" />
+    <Compile Include="Threading\Listener\RegisterManagerWithFilter.cs" />
+    <Compile Include="Threading\Listener\SingleRegisterManager.cs" />
+    <Compile Include="Threading\MultiThreadManager.cs" />
+    <Compile Include="Threading\Queue\QueueManager.cs" />
+    <Compile Include="Threading\Task\CommandThreadTask.cs" />
+    <Compile Include="Threading\Task\AsyncTask.cs" />
+    <Compile Include="Threading\Task\Com\ISerialPortTaskManager.cs" />
+    <Compile Include="Threading\Task\Com\MultiSerialPortTask.cs" />
+    <Compile Include="Threading\Task\Com\SerialPortEx.cs" />
+    <Compile Include="Threading\Task\Com\SerialPortTask.cs" />
+    <Compile Include="Threading\Task\MainTaskBase.cs" />
+    <Compile Include="Threading\Task\StringCommandThreadTask.cs" />
+    <Compile Include="Threading\Task\Sock\AbstractSocketBinaryTask.cs" />
+    <Compile Include="Threading\Task\Sock\AbstractSocketTask.cs" />
+    <Compile Include="Threading\Task\Sock\SingleSocketClientTask.cs" />
+    <Compile Include="Threading\Task\Sock\SocketClientTask.cs" />
+    <Compile Include="Threading\Task\Sock\SocketItemEventArgs.cs" />
+    <Compile Include="Threading\Task\Sock\SocketServerTask.cs" />
+    <Compile Include="Threading\Task\SyncInfoMonitorTask.cs" />
+    <Compile Include="Threading\ThreadImpl.cs" />
+    <Compile Include="Threading\ThreadPoolsManager.cs" />
+    <Compile Include="Threading\ThreadPoolsManagerWithFilter.cs" />
+    <Compile Include="Threading\ThreadTask.cs" />
+    <Compile Include="Threading\V1\AbstractClientSocketTask.cs" />
+    <Compile Include="Threading\V1\ClientSocketTask.cs" />
+    <Compile Include="Threading\V1\IConnection.cs" />
+    <Compile Include="Threading\V1\ISocketStatusChangedListener.cs" />
+    <Compile Include="Threading\V1\SocketTask.cs" />
+    <Compile Include="UiCtrl\AbstractAppFormContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\AbstractChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\AbstractFormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\AbstractMultiChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UiCtrl\AbstractUserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\AppHelper.cs" />
+    <Compile Include="Utils\AsyncTaskUtil.cs" />
+    <Compile Include="Utils\BinaryExtenstion.cs" />
+    <Compile Include="Utils\BinaryUtil.cs" />
+    <Compile Include="Utils\ConsistentHashContainer.cs" />
+    <Compile Include="Utils\DateHelper.cs" />
+    <Compile Include="Utils\FileUtil.cs" />
+    <Compile Include="Utils\IPUtility.cs" />
+    <Compile Include="Utils\NetworkBitConverter.cs" />
+    <Compile Include="Utils\ReflectionHelper.cs" />
+    <Compile Include="Utils\SafetyUtil.cs" />
+    <Compile Include="Utils\SequenceIDHelper.cs" />
+    <Compile Include="Utils\SerializableDictionary.cs" />
+    <Compile Include="Utils\SerializableLinkedList.cs" />
+    <Compile Include="Utils\SerializerHelper.cs" />
+    <Compile Include="Utils\Serializer\AbstractSerializer.cs" />
+    <Compile Include="Utils\Serializer\BinarySerializer.cs" />
+    <Compile Include="Utils\Serializer\FileBinarySerializer.cs" />
+    <Compile Include="Utils\Serializer\MemoryBinarySerializer.cs" />
+    <Compile Include="Utils\Serializer\XmlSerializerImpl.cs" />
+    <Compile Include="Utils\SingletonUtils.cs" />
+    <Compile Include="Utils\SoapFormatter.cs" />
+    <Compile Include="Utils\SystemSleepHelper.cs" />
+    <Compile Include="Utils\NetUtils.cs" />
+    <Compile Include="Exceptions\BaseException.cs" />
+    <Compile Include="Exceptions\PacketException.cs" />
+    <Compile Include="Exceptions\ClientNotFoundException.cs" />
+    <Compile Include="Exceptions\ConfigurationException.cs" />
+    <Compile Include="Exceptions\DisconnectedException.cs" />
+    <Compile Include="PluginEngine\PluginState.cs" />
+    <Compile Include="PluginEngine\IPlugin.cs" />
+    <Compile Include="PluginEngine\PluginAttribute.cs" />
+    <Compile Include="PluginEngine\PluginDescription.cs" />
+    <Compile Include="PluginEngine\PluginInfo.cs" />
+    <Compile Include="PluginEngine\PluginList.cs" />
+    <Compile Include="PluginEngine\InnerPlugin.cs" />
+    <Compile Include="PluginEngine\DefaultPlugin.cs" />
+    <Compile Include="PluginEngine\PluginHelper.cs" />
+    <Compile Include="Extensions\BlockingCollectionExtensions.cs" />
+    <Compile Include="Utils\TaskHelper.cs" />
+    <Compile Include="Common\Attr\PrimaryKeyAttribute.cs" />
+    <Compile Include="Common\Attr\AutoIncrementAttribute.cs" />
+    <Compile Include="Threading\Task\QueueAsyncTask.cs" />
+    <Compile Include="Threading\Task\TaskPoolsManager.cs" />
+    <Compile Include="Utils\ValidatorHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

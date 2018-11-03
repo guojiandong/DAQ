@@ -1,0 +1,5 @@
+E:\1018\libs\Debug\SimpleRpcLib.dll
+E:\1018\libs\Debug\SimpleRpcLib.pdb
+E:\1018\SimpleRpcLib\obj\Debug\SimpleRpcLib.csprojResolveAssemblyReference.cache
+E:\1018\SimpleRpcLib\obj\Debug\SimpleRpcLib.dll
+E:\1018\SimpleRpcLib\obj\Debug\SimpleRpcLib.pdb

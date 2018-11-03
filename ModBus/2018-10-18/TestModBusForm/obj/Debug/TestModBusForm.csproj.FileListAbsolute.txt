@@ -1,0 +1,13 @@
+E:\1018\TestModBusForm\bin\Debug\TestModBusForm.exe.config
+E:\1018\TestModBusForm\bin\Debug\TestModBusForm.exe
+E:\1018\TestModBusForm\bin\Debug\TestModBusForm.pdb
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.csprojResolveAssemblyReference.cache
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.Properties.Resources.resources
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.csproj.GenerateResource.Cache
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.exe
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.pdb
+E:\1018\TestModBusForm\bin\Debug\Ksat.AppPlugIn.dll
+E:\1018\TestModBusForm\bin\Debug\TestSocketConsole.exe
+E:\1018\TestModBusForm\bin\Debug\TestSocketConsole.pdb
+E:\1018\TestModBusForm\bin\Debug\Ksat.AppPlugIn.pdb
+E:\1018\TestModBusForm\obj\Debug\TestModBusForm.Form1.resources

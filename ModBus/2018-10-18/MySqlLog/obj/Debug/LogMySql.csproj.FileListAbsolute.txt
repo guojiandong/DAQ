@@ -1,0 +1,1 @@
+E:\1018\MySqlLog\obj\Debug\LogMySql.csprojResolveAssemblyReference.cache
